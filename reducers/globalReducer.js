@@ -16,7 +16,7 @@
    * @param {Object} action - type and payload
    */
   export default function globalReducer(state = initialState, action) {
-    console.log("action: "+JSON.stringify(action.payload));
+    
     switch (action.type) {
       case 'ADD_PRODUCT':
         return {...state,products: [...state.products,action.payload]};
@@ -76,9 +76,15 @@
         }
         
       case 'ACTIVE_FAVORITE':
+        console.log("active: "+JSON.stringify(action.payload));
         return {...state,favorites: [...state.favorites,action.payload]};
+
       case 'INACTIVE_FAVORITE':
-        return {...state,favorites: state.favorites.filter((item, index)=> index !== action.payload)};  
+        console.log("inactive: "+action.payload);
+        let temp_favorites = [...state.favorites]
+        let temp_favorites_element = {...temp_favorites[action.payload]}
+        const ls3 = temp_favorites.filter((el)=>el.id !== temp_favorites_element.id)
+        return {...state,favorites: ls3};  
         
           
       default:

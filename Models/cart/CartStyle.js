@@ -19,7 +19,7 @@ import { COLOURS } from '../../Components/database/Database'
         paddingTop: 20,
         
         justifyContent: 'center',
-        alignItems: 'center'
+        
       },
       
       
@@ -131,7 +131,86 @@ import { COLOURS } from '../../Components/database/Database'
     price: {
       fontSize: 16,
       color: COLOURS.backgroundDark
-    }
+    },
+    chevron1: {
+      width: 30,
+      height: 30,
+      
+    },
+    adress: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      
+      alignItems: 'center',
+      marginBottom: 30,
+      
+  },
+  adress2: {
+      
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignContent: 'center',
+      alignItems: 'center',
+      
+      
+  },
+  camionIcon: {
+      width: 20,
+      height:20,
+  },
+  visaIcon: {
+    width: 35,
+    height:35,
+},
+  camion: {
+      backgroundColor: COLOURS.backgroundLight,
+      padding: 16,
+      borderRadius: 20
+  },
+  visa: {
+    backgroundColor: COLOURS.backgroundLight,
+    padding: 9,
+    borderRadius: 20
+},
+  adressTxt: {
+      fontSize: 16,
+      color: "gray",
+      width: 170,
+      
+      marginLeft: 10,
+      
+      
+  },
+  title: {
+    color: COLOURS.black,
+    fontSize: 20,
+    fontWeight: "600",
+    marginBottom: 15,
+  },
+  totalView: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20
+    
+  },
+  total: {
+    fontSize: 16,
+    color: "gray",
+    
+  },
+  buttonCheckOut: {
+    backgroundColor: COLOURS.blue,
+    padding: 10,
+    borderRadius: 20,
+    marginVertical: 30
+    
+},
+BtnText: {
+  color: COLOURS.white,
+  fontSize: 20,
+  textAlign: 'center'
+},
     
     
 });

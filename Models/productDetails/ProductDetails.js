@@ -183,9 +183,9 @@ const dispatch = useDispatch();
                 dispatch(addProduct(product));
                 dispatch(addQuantity({productID: productID, quantityOrigin: product.quantity - 1, quantityToken: 1}))
                 
-                Alert.alert("Product was added", "Please check your Cart")  
+                Alert.alert("Product was added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])  
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}]) 
               }
               
               }}>

@@ -7,7 +7,7 @@ import styles from './FavoritesStyle';
 import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
-import {addProduct} from '../../action';
+import {addProduct,addQuantity} from '../../action';
 
 
 
@@ -16,49 +16,44 @@ export default function AllProducts({navigation,route}){
 
 
 
-  const [list, setList] = useState([]);
-  const [title, setTitle] = useState('');
+  
   const [isLoading, setIsLoading] = useState(false)
-  const [products2, setProducts2] = useState({});
+  
 
   const dispatch = useDispatch();
 
 
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      getDataFromDB();
-    });
-
-    return unsubscribe;
-  }, [navigation]);
+  // useEffect(() => {
+  //     getDataFromDB();
+  // }, []);
   
   
     
 
-    const favorites = useSelector((state)=> state.global.favorites)
+    const favorites = useSelector((state)=> state.global.favorites);
+    const quantites= useSelector((state) => state.global.quantites);
     
 
-  const getDataFromDB = () => {  
-    let productList = []
-    for (let index = 0; index < Items.length; index++) {
-      for (let index = 0; index < favorites.length; index++) {
-        if (Items[index].id == favorites[index].productID && favorites.findIndex((el)=>el.productID == productList.productID) == -1) {
-          productList.push(Items[index]);
-          
-        } 
-        
-      }
+  // const getDataFromDB = async => {  
+  //   let productList = []
+  //   for (let index = 0; index < favorites.length; index++) {
+  //     let i = Items.findIndex((el)=>el.id === favorites[index].productID)
       
-    }
-    setProducts2(productList);
-  }
+  //     if (i !== -1) {
+  //       productList.push(Items[i])
+  //     }
+  //   }
+  //   setProducts2(productList);
+  //   console.log("productList: "+JSON.stringify(productList));
+  //   console.log("favorites: "+JSON.stringify(favorites));
+  // }
 
   
 
 
 
-  const Item = ({id,isOff,offPercentage,category, productImage,isAvailable,productPrice,productName,prod}) => (
+  const Item = ({id,isOff,offPercentage,category, productImage,isAvailable,productPrice,productName,prod,quantity}) => (
     <View
         
         style={{
@@ -125,17 +120,35 @@ export default function AllProducts({navigation,route}){
           <View style={styles.cart}>
             <TouchableOpacity style={styles.button}
             onPress={()=>{ 
-              console.log("produit  "+prod);
-              dispatch(addProduct(prod))
-              Alert.alert("Product added", "Please check your Cart")
+              const el = (element) => element.productID === id
+
+              let check = quantites.findIndex(el)
+
+              if (check === -1) {
+
+                dispatch(addProduct(prod))
+                dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
+                Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
+              }else{
+                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+              }
              }}>
               <Text style={styles.btnText}>Add to cart</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.cartBtn}
             onPress={()=>{
-              console.log("produit  "+prod);
-              dispatch(addProduct(prod))
-              Alert.alert("Product added", "Please check your Cart")
+              const el = (element) => element.productID === id
+
+              let check = quantites.findIndex(el)
+
+              if (check === -1) {
+
+                dispatch(addProduct(prod))
+                dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
+                Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
+              }else{
+                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+              }
             }}>
               <Image source={require('../../Assets/Icons/cart.png')} style={styles.icon}/>
             </TouchableOpacity>
@@ -161,6 +174,7 @@ const renderItem = ({item}) => {
       isAvailable={item.isAvailable}
       productPrice={item.productPrice}
       productName={item.productName}
+      quantity={item.quantity}
       prod={item}
       />
   );
@@ -200,13 +214,13 @@ const handle = () => {
   return ( 
 
     <SafeAreaView style={styles.container}>
-        <Header name={title} onPress={() => navigation.navigate('Home')}/>
+        <Header name={"Favorites"} onPress={() => navigation.navigate('Home')}/>
         
         
         
                 
                 <FlatList
-                  data={products2}
+                  data={favorites}
                   
                   renderItem={renderItem}
                   keyExtractor={item=>item.id}

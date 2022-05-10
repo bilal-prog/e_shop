@@ -36,14 +36,15 @@ const TabNavigator = (props) => {
   
 
   const products= useSelector((state) => state.global.products);
+  const favorites= useSelector((state) => state.global.favorites);
   
   // console.log(configureStore().store.getState().global.products);
   // const dispatch = useDispatch();
   // dispatch(addProduct({nom:"hamdi"}))
    console.log(JSON.stringify(configureStore().store.getState().global.products.length));
   let profileBadge=11;
-  let homeBadge=2;
-  let favoriteBadge=30;
+  let homeBadge=products.length;
+  let favoriteBadge=favorites.length;
   let cartBadge=products.length;
   return (
     <Tab.Navigator

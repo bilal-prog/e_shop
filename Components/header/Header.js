@@ -28,7 +28,7 @@ export default function Header(props){
       
       
       <View style={styles.iconsContainer}>
-        <TouchableOpacity onPress={props?.onPress} style={[styles.iconBack,{backgroundColor: props?.badgeShoppingBag > 0 ? iconBack : (null)}]}>
+        <TouchableOpacity  style={[styles.iconBack,{backgroundColor: props?.badgeShoppingBag > 0 ? iconBack : (null)}]}>
           <Image source={require('../../Assets/Icons/cart.png')} style={styles.icon}/>
           {props?.badgeShoppingBag > 0 
           ?
@@ -49,7 +49,7 @@ export default function Header(props){
       </TouchableOpacity>
       
       </View>
-      : props?.name=="All Products" || props?.name=="All Accessories" 
+      : props?.name=="All Products" || props?.name=="All Accessories" || props?.name=="Favorites"
       ?
       <View style={styles.iconsContainer}>
         <TouchableOpacity onPress={props.onPress}>
@@ -64,7 +64,7 @@ export default function Header(props){
         style={styles.iconBack2}>
           <Image style={styles.icon} source={require('../../Assets/Icons/chevronLeft.png')}/>
         </TouchableOpacity>
-        <Text style={styles.textHeader}>My {props?.name}</Text>
+        <Text style={[styles.textHeader,{padding: 15}]}>My {props?.name}</Text>
       </View>  
       :
       (null)

@@ -31,6 +31,7 @@ export default function Home({navigation}){
     
     const dispatch = useDispatch();
     const favorites= useSelector((state) => state.global.favorites);
+    const productsStore= useSelector((state) => state.global.products);
 
 
     //get called on screen loads
@@ -168,11 +169,14 @@ setAccessory4(accessoryList4);
   const checkActive = (id) => 
   {
     
-      for (let index = 0; index < favorites.length; index++) {
-      if (favorites[index].productID == id) {
-        return favorites[index].favoris;
+    const index = favorites.findIndex((el)=>el.id === id)
+      
+      if (index !== -1) {
+        return true
+      }else{
+        return false;
       }
-    }
+    
   
   }
 
@@ -298,22 +302,24 @@ setAccessory4(accessoryList4);
           <TouchableOpacity
            onPress={()=>{
              if(favorites.length === 0){
-              dispatch(activeFavorite({productID: id, favoris: true}))
+              dispatch(activeFavorite(item))
               console.log(JSON.stringify(favorites));
              }else{
-              for (let index = 0; index < favorites.length; index++) {
-                if ( id == favorites[index].productID) {
-                  // if(favorites[index].favoris === true){
-                  //   dispatch(setFavorisFalse(index))
-                  // }else{
-                  //   dispatch(setFavorisTrue(index))
-                  // }
-                  dispatch(inactiveFavorite(index))
-                }else{
-                  dispatch(activeFavorite({productID: id, favoris: true}))
-                }
+              const index = favorites.findIndex((el)=>el.id === id)
+
+              if ( index !== -1 ) {
+                // if(favorites[index].favoris === true){
+                //   dispatch(setFavorisFalse(index))
+                // }else{
+                //   dispatch(setFavorisTrue(index))
+                // }
+                dispatch(inactiveFavorite(index))
+              }else{
+                dispatch(activeFavorite(item))
+              }
              }
-           }}}
+             
+           }}
            
            
            
@@ -386,7 +392,7 @@ const renderItem = ({item}) => {
         <ScrollView showsVerticalScrollIndicator={false} style={{height:"100%", width: '100%'}}
           
         >
-        <Header name='Home' badgeShoppingBag={10} badgeCart={20}/>
+        <Header name='Home' badgeShoppingBag={10} badgeCart={productsStore.length} onPress={()=>{navigation.navigate("Cart")}}/>
         
         
         <View style={styles.container2}>

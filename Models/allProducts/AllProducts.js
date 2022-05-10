@@ -179,15 +179,17 @@ const checkActive = (id) =>
 
                 dispatch(addProduct(prod))
                 dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
-                Alert.alert("Product added", "Please check your Cart")
+                Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}]) 
               }
              }}>
               <Text style={styles.btnText}>Add to cart</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cartBtn}
+            <TouchableOpacity style={[styles.cartBtn,{opacity: !isAvailable? 0.5 : 1}]}
+            disabled={!isAvailable}
             onPress={()=>{
+              
               const el = (element) => element.productID === id
 
               let check = quantites.findIndex(el)
@@ -196,9 +198,9 @@ const checkActive = (id) =>
 
                 dispatch(addProduct(prod))
                 dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
-                Alert.alert("Product added", "Please check your Cart")
+                Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}]) 
               }
               
             }}>

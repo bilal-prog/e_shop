@@ -1,4 +1,4 @@
-import { SafeAreaView,TextInput,FlatList, Text, ScrollView, View,Image,TouchableOpacity } from 'react-native';
+import { SafeAreaView,TextInput,FlatList, Text,Alert, ScrollView, View,Image,TouchableOpacity } from 'react-native';
 import React, {useState, useEffect} from 'react';
 
 import styles from './CartStyle';
@@ -17,9 +17,11 @@ export default function Cart({navigation,route}){
 
 
 
-const [numP, setNumP] = useState(null)
+const [totalPrice, setTotalPrice] = useState(0)
   
-
+   useEffect(() => {
+     totalPriceFunction();
+   }, []);
 
 
   const products= useSelector((state) => state.global.products);
@@ -43,11 +45,88 @@ const quantityById = (id)=>{
 
 
 
+const ListFooterComponent = () =>(
+  <View>
+    <Text style={styles.title}>Delivery Location</Text>
+
+<View style={styles.adress}>
+      <View style={styles.adress2}>
+
+      <TouchableOpacity style={styles.camion}>
+        <Image style={styles.camionIcon} source={require('../../Assets/Icons/camion.png')}/>
+      </TouchableOpacity>
+      <View>
+        <Text numberOfLines={3} style={styles.adressTxt}>ave 20 agdal rabat ave 20 agdal rabatave 20 agdal rabatave 20 agdal rabat</Text>
+      </View>
+      </View>
+        <TouchableOpacity>
+          <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
+        </TouchableOpacity>
+</View>
+
+<Text style={styles.title}>Payement Method</Text>
+
+<View style={styles.adress}>
+      <View style={styles.adress2}>
+
+      <TouchableOpacity style={styles.visa}>
+        <Image style={styles.visaIcon} source={require('../../Assets/Icons/visa.png')}/>
+      </TouchableOpacity>
+      <View>
+        <Text numberOfLines={3} style={styles.adressTxt}>VISA CLASSIC {'\n'}*****0921</Text>
+      </View>
+      </View>
+        <TouchableOpacity>
+          <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
+        </TouchableOpacity>
+</View>
+<View style={{marginBottom: 40}}/>
+
+<Text style={styles.title}>Payement Method</Text>
+
+<View style={styles.totalView}>
+  <Text style={styles.total}>SubTotal</Text>
+  <Text style={styles.total}>${totalPrice}</Text>
+</View>
+
+<View style={[styles.totalView,{marginBottom: 45}]}>
+  <Text style={styles.total}>Shipping Cost</Text>
+  <Text style={styles.total}>+100</Text>
+</View>
+
+<View style={[styles.totalView,]}>
+  <Text style={styles.total}>Total</Text>
+  <Text style={[styles.total,{color: COLOURS.black, fontWeight: '700', fontSize: 25}]}>${totalPrice + 100}</Text>
+</View>
+
+<TouchableOpacity style={styles.buttonCheckOut}
+    onPress={
+      ()=>{
+        Alert.alert("Still in progress mode")
+      }
+    }
+    >
+      <Text style={styles.BtnText}>CHECKOUT(${totalPrice + 100})</Text>
+</TouchableOpacity>
+  </View>
+)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,productPrice,productName,quantity}) => (
+  
   <View
       
       style={{
@@ -94,8 +173,8 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
         <Text style={styles.price}>Quantity: {quantityById(id).quantityOrigin}</Text>
         <View style={styles.cart}>
             
-              <TouchableOpacity style={styles.button}
-
+              <TouchableOpacity style={[styles.button,{opacity: quantityById(id).quantityToken === 1? 0.4 : 1}]}
+              disabled={quantityById(id).quantityToken === 1? true : false}
               //minimizer quantité par 1
               onPress={
                 ()=>{
@@ -109,8 +188,8 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
                 <Text style={styles.btnText}>-</Text>
               </TouchableOpacity>
               <Text style={styles.price}>{quantityById(id).quantityToken}</Text>
-              <TouchableOpacity style={styles.button}
-
+              <TouchableOpacity style={[styles.button,{opacity: quantityById(id).quantityOrigin === 0? 0.4 : 1}]}
+              disabled={quantityById(id).quantityOrigin === 0? true : false}
               //maximizer quantité par 1
               onPress={
                 ()=>{
@@ -130,10 +209,14 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
             <TouchableOpacity style={styles.deleteBtn}
               onPress={
                 ()=>{
+                  Alert.alert("Product removing","Are you sure you want to remove this product?",[{text: "Cancel",
+                onPress: ()=> console.log("cancel")},{text: "Yes", onPress: ()=>{
                   const el = (element) => element.id == id
                 
                 dispatch(deleteProduct(products.findIndex(el)))
                 dispatch(deleteQuantity(quantites.findIndex(el)))
+                }}])
+                  
                 }
               }
             >
@@ -167,12 +250,34 @@ return(
 
 }
 
+
+
+
+
+
+const totalPriceFunction = () =>{
+  let somme = 0;
+  products.map((el)=> somme = somme + el.productPrice);
+
+  setTotalPrice(somme);
+
+}
+
+
+
+
+
+
+
+
+// ?????? My Cart View
+
   return ( 
 
     <SafeAreaView style={styles.container}>
       <Header name='Cart' onPress={() => navigation.navigate('Home')}/>
-        <View style={styles.cnt}>
         
+        <View style={styles.cnt}>
 
         
           <View style={styles.flatView}>
@@ -183,12 +288,15 @@ return(
                       keyExtractor={item=>item.id}
                       maxToRenderPerBatch={5}
                       showsVerticalScrollIndicator={false}
+                      ListFooterComponent={ListFooterComponent}
+                      ListFooterComponentStyle={{marginVertical: 40}}
             />
           </View>
 
+          
 
-
-        </View>
+          </View>
+        
         
         
     </SafeAreaView>

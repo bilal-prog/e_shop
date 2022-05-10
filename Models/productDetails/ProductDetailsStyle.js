@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
     chevron: {
         width: 30,
         height: 30,
-        padding: 12,
+        padding: 20,
         backgroundColor: COLOURS.white,
+        
     },
     chevron1: {
         width: 30,
