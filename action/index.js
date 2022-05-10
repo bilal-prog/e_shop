@@ -11,17 +11,23 @@ export const addProduct = (payload) => dispatch => {
     })
   }
 
-  export const maxProduct = () => dispatch => {
+  export const addQuantity = (payload) => dispatch => {
     dispatch({
-      type:"MAX_PRODUCT",
-      
+      type:"ADD_QUANTITY",
+      payload: payload
     })
   }
 
-  export const minProduct = () => dispatch => {
+  export const minProduct = (payload) => dispatch => {
     dispatch({
       type:"MIN_PRODUCT",
-      
+      payload: payload
+    })
+  }
+  export const plusProduct = (payload) => dispatch => {
+    dispatch({
+      type:"PLUS_PRODUCT",
+      payload: payload
     })
   }
 
@@ -49,5 +55,17 @@ export const addProduct = (payload) => dispatch => {
     dispatch({
       type:"SET_FAVORIS_FALSE",
       
+    })
+  }
+  export const deleteProduct = (payload) => dispatch => {
+    dispatch({
+      type:"DELETE_PRODUCT",
+      payload: payload
+    })
+  }
+  export const deleteQuantity = (payload) => dispatch => {
+    dispatch({
+      type:"DELETE_QUANTITY",
+      payload: payload
     })
   }

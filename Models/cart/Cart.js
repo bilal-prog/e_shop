@@ -5,7 +5,7 @@ import styles from './CartStyle';
 import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addProduct,} from '../../action';
+import { plusProduct,minProduct, deleteProduct, deleteQuantity} from '../../action';
 import {COLOURS} from '../../Components/database/Database'
 
 
@@ -23,9 +23,22 @@ const [numP, setNumP] = useState(null)
 
 
   const products= useSelector((state) => state.global.products);
-  const numProducts= useSelector((state) => state.global.numProducts);
+  const quantites= useSelector((state) => state.global.quantites);
   const dispatch = useDispatch();
   
+const quantityById = (id)=>{
+          const el = (element) => element.productID == id
+          return quantites[quantites.findIndex(el)]
+        }
+// const indexById = (id) => {
+  
+//   for (let index = 0; index < quantites.length; index++) {
+//     if (quantites[index].productID === id) {
+//       return index;
+//     }
+    
+//   }
+// }
 
 
 
@@ -34,8 +47,7 @@ const [numP, setNumP] = useState(null)
 
 
 
-
-const Item = ({id,isOff,offPercentage,category, productImage,isAvailable,productPrice,productName,quantity}) => (
+const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,productPrice,productName,quantity}) => (
   <View
       
       style={{
@@ -46,6 +58,7 @@ const Item = ({id,isOff,offPercentage,category, productImage,isAvailable,product
         justifyContent: 'space-between'
 
       }}>
+      
       <View
         style={styles.cardContainer1}>
         
@@ -78,20 +91,34 @@ const Item = ({id,isOff,offPercentage,category, productImage,isAvailable,product
         </Text>
         
         <Text style={styles.price}>&#8377; {productPrice}</Text>
-        <Text style={styles.price}>Quantity: {quantity}</Text>
+        <Text style={styles.price}>Quantity: {quantityById(id).quantityOrigin}</Text>
         <View style={styles.cart}>
             
               <TouchableOpacity style={styles.button}
 
               //minimizer quantité par 1
+              onPress={
+                ()=>{
+                  const el = (element) => element.id == id
+                
+                dispatch(minProduct(products.findIndex(el)))
+                }
+              }
 
               >
                 <Text style={styles.btnText}>-</Text>
               </TouchableOpacity>
-              <Text>{numProducts}</Text>
+              <Text style={styles.price}>{quantityById(id).quantityToken}</Text>
               <TouchableOpacity style={styles.button}
 
               //maximizer quantité par 1
+              onPress={
+                ()=>{
+                  const el = (element) => element.id == id
+                
+                dispatch(plusProduct(products.findIndex(el)))
+                }
+              }
 
               >
                 <Text style={styles.btnText}>+</Text>
@@ -100,7 +127,16 @@ const Item = ({id,isOff,offPercentage,category, productImage,isAvailable,product
             
         </View>
       </View>
-            <TouchableOpacity style={styles.deleteBtn}>
+            <TouchableOpacity style={styles.deleteBtn}
+              onPress={
+                ()=>{
+                  const el = (element) => element.id == id
+                
+                dispatch(deleteProduct(products.findIndex(el)))
+                dispatch(deleteQuantity(quantites.findIndex(el)))
+                }
+              }
+            >
               <Image source={require('../../Assets/Icons/delete.png')} style={styles.icon}/>
             </TouchableOpacity>
     </View>
@@ -124,6 +160,7 @@ return(
     productPrice={item.productPrice}
     productName={item.productName}
     quantity={item.quantity}
+    item={item}
     
     />
 );

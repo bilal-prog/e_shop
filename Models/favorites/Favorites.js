@@ -1,112 +1,60 @@
-import { SafeAreaView,TextInput,FlatList, Text, ScrollView, View,Image,TouchableOpacity } from 'react-native';
+import { SafeAreaView,TextInput,ActivityIndicator,Alert, FlatList, Text, ScrollView, View,Image,TouchableOpacity } from 'react-native';
 import React, {useState, useEffect} from 'react';
+import {COLOURS, Items} from '../../Components/database/Database'
+
 
 import styles from './FavoritesStyle';
 import Header from '../../Components/header/Header';
-import { Items } from '../../Components/database/Database';
+
+import { useSelector, useDispatch } from 'react-redux';
 import {addProduct} from '../../action';
-import { useDispatch, useSelector } from 'react-redux';
-
-//import { useSelector, useDispatch } from 'react-redux';
-//import { addProduct} from '../../redux/productReducer';
 
 
 
 
-
-export default function Favorites({navigation}){
-
-
-const favorites = useSelector((state)=>state.global.favorites)
+export default function AllProducts({navigation,route}){
 
 
 
-  const prod = []
+  const [list, setList] = useState([]);
+  const [title, setTitle] = useState('');
+  const [isLoading, setIsLoading] = useState(false)
+  const [products2, setProducts2] = useState({});
 
- const dispatch = useDispatch();
-
-
-
-
-
+  const dispatch = useDispatch();
 
 
 
-
-
-
-
-
-  
   useEffect(() => {
-    
     const unsubscribe = navigation.addListener('focus', () => {
       getDataFromDB();
     });
 
     return unsubscribe;
   }, [navigation]);
-
-
-
-
   
-
-
-
-
-
-
-
-
-
-const addP = async (id) => {
-  for (let index = 0; index < list.length; index++) {
-    if (list[index].id == id) {
-      await setProducts(list[index]);
-      return;
-    }
-  }
   
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-  const getDataFromDB = async => {
     
+
+    const favorites = useSelector((state)=> state.global.favorites)
+    
+
+  const getDataFromDB = () => {  
+    let productList = []
     for (let index = 0; index < Items.length; index++) {
-
-      for (let i = 0; i < favorites.length; i++) { 
-      if (Items[index].id == favorites[i].id) {
+      for (let index = 0; index < favorites.length; index++) {
+        if (Items[index].id == favorites[index].productID && favorites.findIndex((el)=>el.productID == productList.productID) == -1) {
+          productList.push(Items[index]);
+          
+        } 
         
-        prod.push(Items[index]);
-        
-        return;
       }
+      
     }
-    
+    setProducts2(productList);
   }
-}
+
   
-
-
-
-
-
-
-
-
-
 
 
 
@@ -179,6 +127,7 @@ const addP = async (id) => {
             onPress={()=>{ 
               console.log("produit  "+prod);
               dispatch(addProduct(prod))
+              Alert.alert("Product added", "Please check your Cart")
              }}>
               <Text style={styles.btnText}>Add to cart</Text>
             </TouchableOpacity>
@@ -186,7 +135,7 @@ const addP = async (id) => {
             onPress={()=>{
               console.log("produit  "+prod);
               dispatch(addProduct(prod))
-              
+              Alert.alert("Product added", "Please check your Cart")
             }}>
               <Image source={require('../../Assets/Icons/cart.png')} style={styles.icon}/>
             </TouchableOpacity>
@@ -200,29 +149,43 @@ const addP = async (id) => {
 
 
 
-
-
-
-
-  const renderItem = ({item}) => {
+const renderItem = ({item}) => {
 
   
-    return(
-        <Item id={item.id}
-        isOff={item.isOff}
-        offPercentage={item.offPercentage}
-        category={item.category}
-        productImage={item.productImage}
-        isAvailable={item.isAvailable}
-        productPrice={item.productPrice}
-        productName={item.productName}
-        prod={item}
-        />
-    );
-    
-  }
+  return(
+      <Item id={item.id}
+      isOff={item.isOff}
+      offPercentage={item.offPercentage}
+      category={item.category}
+      productImage={item.productImage}
+      isAvailable={item.isAvailable}
+      productPrice={item.productPrice}
+      productName={item.productName}
+      prod={item}
+      />
+  );
+  
+}
 
 
+
+
+
+
+const renderFooter = () => {
+  return (
+    isLoading ?
+    <View style={styles.loader}>
+      <ActivityIndicator size={'large'}/>
+    </View>
+    : null
+  );
+}
+
+
+const handle = () => {
+
+}
 
 
 
@@ -236,61 +199,25 @@ const addP = async (id) => {
 
   return ( 
 
-    <SafeAreaView>
-        <Header name='Favorites'/>
+    <SafeAreaView style={styles.container}>
+        <Header name={title} onPress={() => navigation.navigate('Home')}/>
         
-        <FlatList
-                  data={prod}
+        
+        
+                
+                <FlatList
+                  data={products2}
                   
                   renderItem={renderItem}
                   keyExtractor={item=>item.id}
                   maxToRenderPerBatch={5}
                   showsVerticalScrollIndicator={false}
-                  
+                  ListFooterComponent={renderFooter}
+                  onEndReached={handle}
+                  onEndReachedThreshold={0}
                   />
-        
+
+            
     </SafeAreaView>
    );
 }
-
-
-
-
-
-
-
-
-
-// import * as React from 'react';
-// import { View, Text, ScrollView, Button } from 'react-native';
-// import { Card } from 'react-native-paper';
-
-// const a = Array(50)
-//   .fill()
-//   .map((_, i) => i);
-
-// const App = () => {
-//   const scrollViewRef = React.useRef();
-//   const [pos, setPos] = React.useState(0);
-//   const [arr, setArr] = React.useState(a);
-
-//   return (
-//     <View style={{ flex: 1 }}>
-//       <Text>pos: {pos}</Text>
-//       <ScrollView
-//         style={{ height: '200px' }}
-//         onScroll={(e) => setPos(e.nativeEvent.contentOffset.y)}>
-//         {arr.map((i) => (
-//           <Text>{i}</Text>
-//         ))}
-//       </ScrollView>
-//     </View>
-//   );
-// };
-// export default App;
-
-
-
-
- 
-

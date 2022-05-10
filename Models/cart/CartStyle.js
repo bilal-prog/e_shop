@@ -102,8 +102,8 @@ import { COLOURS } from '../../Components/database/Database'
           textAlign: 'center'
       },
       icon: {
-        width:15,
-        height: 15,
+        width:20,
+        height: 20,
         
         
     },
@@ -120,7 +120,7 @@ import { COLOURS } from '../../Components/database/Database'
         paddingHorizontal: 5,
         paddingVertical: 5,
         borderRadius: 100,
-        marginLeft: '30%',
+        marginLeft: '25%',
         marginBottom: 10,
         alignSelf: 'flex-end'
         

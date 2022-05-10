@@ -7,7 +7,7 @@ import styles from './AllProductsStyle';
 import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
-import {addProduct} from '../../action';
+import {addProduct,addQuantity,activeFavorite, inactiveFavorite} from '../../action';
 
 
 
@@ -19,7 +19,11 @@ export default function AllProducts({navigation,route}){
   const [list, setList] = useState([]);
   const [title, setTitle] = useState('');
   const [isLoading, setIsLoading] = useState(false)
+  const [available, setAvailable] = useState(false)
   const [product, setProduct] = useState({});
+
+  const quantites= useSelector((state) => state.global.quantites);
+  const favorites= useSelector((state) => state.global.favorites);
 
   const dispatch = useDispatch();
 
@@ -46,16 +50,21 @@ export default function AllProducts({navigation,route}){
 
 
 
-const addP = async (id) => {
-  for (let index = 0; index < list.length; index++) {
-    if (list[index].id == id) {
-      await setProduct(list[index]);
-      return;
-    }
-  }
-  
-}
 
+
+
+
+
+const checkActive = (id) => 
+  {
+    
+      for (let index = 0; index < favorites.length; index++) {
+      if (favorites[index].productID == id) {
+        return favorites[index].favoris;
+      }
+    }
+  
+  }
 
 
 
@@ -84,12 +93,15 @@ const addP = async (id) => {
 
 
 
-  const Item = ({id,isOff,offPercentage,category, productImage,isAvailable,productPrice,productName,prod}) => (
+  const Item = ({id,quantity,isOff,offPercentage,category, productImage,isAvailable,productPrice,productName,prod}) => (
+    <View style={{
+      marginVertical: 14,
+    }}>
     <View
         
         style={{
           width: '43%',
-          marginVertical: 14,
+          
           
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -135,7 +147,9 @@ const addP = async (id) => {
             {productName}
           </Text>
           {category == 'accessory' ? (
-            isAvailable ? (
+            isAvailable ?
+            
+            (
               <View style={styles.availableView}>
                 <View style={[styles.circle,{backgroundColor: COLOURS.green}]}/>
                 <Text style={{ fontSize: 12,color: COLOURS.green, }}>Available</Text>
@@ -148,26 +162,81 @@ const addP = async (id) => {
             )
           ) : null}
           <Text style={styles.price}>&#8377; {productPrice}</Text>
-          <View style={styles.cart}>
-            <TouchableOpacity style={styles.button}
+          
+        </View>
+      </View>
+
+
+<View style={styles.cart}>
+            <TouchableOpacity style={[styles.button,{opacity: !isAvailable? 0.5 : 1}]}
+            disabled={!isAvailable}
             onPress={()=>{ 
-              console.log("produit  "+prod);
-              dispatch(addProduct(prod))
-              Alert.alert("Product added", "Please check your Cart")
+              const el = (element) => element.productID === id
+
+              let check = quantites.findIndex(el)
+
+              if (check === -1) {
+
+                dispatch(addProduct(prod))
+                dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
+                Alert.alert("Product added", "Please check your Cart")
+              }else{
+                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+              }
              }}>
               <Text style={styles.btnText}>Add to cart</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.cartBtn}
             onPress={()=>{
-              console.log("produit  "+prod);
-              dispatch(addProduct(prod))
-              Alert.alert("Product added", "Please check your Cart")
+              const el = (element) => element.productID === id
+
+              let check = quantites.findIndex(el)
+
+              if (check === -1) {
+
+                dispatch(addProduct(prod))
+                dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
+                Alert.alert("Product added", "Please check your Cart")
+              }else{
+                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+              }
+              
             }}>
               <Image source={require('../../Assets/Icons/cart.png')} style={styles.icon}/>
             </TouchableOpacity>
+
+            <TouchableOpacity
+           onPress={()=>{
+             if(favorites.length === 0){
+              dispatch(activeFavorite({productID: id, favoris: true}))
+              console.log(JSON.stringify(favorites));
+             }else{
+              for (let index = 0; index < favorites.length; index++) {
+                if ( id == favorites[index].productID) {
+                  // if(favorites[index].favoris === true){
+                  //   dispatch(setFavorisFalse(index))
+                  // }else{
+                  //   dispatch(setFavorisTrue(index))
+                  // }
+                  dispatch(inactiveFavorite(index))
+                }else{
+                  dispatch(activeFavorite({productID: id, favoris: true}))
+                }
+             }
+           }}}
+           
+           
+           
+           >
+           {checkActive(id)?
+            <Image style={styles.favorisIcon} source={require('../../Assets/Icons/favorisActive.png')} />
+           : 
+            <Image style={styles.favorisIcon} source={require('../../Assets/Icons/favoris.png')} />
+            }
+          </TouchableOpacity>
           </View>
-        </View>
-      </View>
+
+          </View>
 );
 
 
@@ -181,6 +250,7 @@ const renderItem = ({item}) => {
   return(
       <Item id={item.id}
       isOff={item.isOff}
+      quantity={item.quantity}
       offPercentage={item.offPercentage}
       category={item.category}
       productImage={item.productImage}

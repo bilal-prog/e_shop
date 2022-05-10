@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import styles from './ProductDetailsStyle';
 import { Items , COLOURS} from '../../Components/database/Database';
 import { useSelector, useDispatch } from 'react-redux';
-import {addProduct, maxProduct, minProduct} from '../../action';
+import {addProduct, addQuantity, minProduct} from '../../action';
 
 
 
@@ -176,13 +176,18 @@ const dispatch = useDispatch();
               <Text style={styles.description}>Tax Rate 2%-$4.00(=$195.00)</Text>
               <TouchableOpacity style={styles.button}
               onPress={()=>{
-              dispatch(maxProduct({productID: productID, quantityToken: 1}))
-              dispatch(addProduct(product));
-              console.log("hellloo   "+JSON.stringify(products));
-              console.log(products.length);
-              console.log("hellloo   "+JSON.stringify(quantites));
-              console.log(quantites.length);
-              Alert.alert("Product added", "Please check your Cart")
+              const el = (element) => element.productID === productID
+
+              let check = quantites.findIndex(el)
+              if (check == -1) {
+                dispatch(addProduct(product));
+                dispatch(addQuantity({productID: productID, quantityOrigin: product.quantity - 1, quantityToken: 1}))
+                
+                Alert.alert("Product was added", "Please check your Cart")  
+              }else{
+                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+              }
+              
               }}>
                 <Text style={styles.BtnText}>ADD TO CART</Text>
               </TouchableOpacity>

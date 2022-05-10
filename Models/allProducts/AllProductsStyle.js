@@ -22,7 +22,7 @@ import { COLOURS } from '../../Components/database/Database'
       container4: {
         
         width: '100%',
-        height: 120,
+        height: 80,
         flexDirection: 'column',
         justifyContent: 'center',
         
@@ -68,7 +68,7 @@ import { COLOURS } from '../../Components/database/Database'
       cardContainer1: {
         
         width: '100%',
-        height: 120,
+        height: 80,
         borderRadius: 10,
         backgroundColor: COLOURS.backgroundLight,
         position: 'relative',
@@ -134,7 +134,7 @@ import { COLOURS } from '../../Components/database/Database'
           borderRadius:100
       },
       button: {
-          width: '70%',
+          width: '50%',
           height: 35,
           backgroundColor: COLOURS.green,
           borderRadius: 5,
@@ -169,7 +169,12 @@ import { COLOURS } from '../../Components/database/Database'
     price: {
       fontSize: 16,
       color: COLOURS.backgroundDark
-    }
+    },
+    favorisIcon: {
+      height: 30,
+      width: 30,
+      marginLeft: 10
+    },
 });
 export default styles;
 
