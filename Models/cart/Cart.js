@@ -5,7 +5,7 @@ import styles from './CartStyle';
 import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { plusProduct,minProduct, deleteProduct, deleteQuantity} from '../../action';
+import { plusProduct,minProduct, deleteProduct, deleteQuantity, initializeProducts,addCommand} from '../../action';
 import {COLOURS} from '../../Components/database/Database'
 
 
@@ -19,19 +19,21 @@ export default function Cart({navigation,route}){
 
 const [totalPrice, setTotalPrice] = useState(0)
   
-   useEffect(() => {
-     totalPriceFunction();
-   }, []);
+   
 
 
-  const products= useSelector((state) => state.global.products);
-  const quantites= useSelector((state) => state.global.quantites);
-  const dispatch = useDispatch();
+  const products= useSelector((state) => state.global?.products);
   
-const quantityById = (id)=>{
-          const el = (element) => element.productID == id
-          return quantites[quantites.findIndex(el)]
-        }
+  const dispatch = useDispatch();
+
+  
+
+
+  useEffect(() => {
+     
+    totalPriceFunction();
+  }, [products]);
+
 // const indexById = (id) => {
   
 //   for (let index = 0; index < quantites.length; index++) {
@@ -56,7 +58,7 @@ const ListFooterComponent = () =>(
         <Image style={styles.camionIcon} source={require('../../Assets/Icons/camion.png')}/>
       </TouchableOpacity>
       <View>
-        <Text numberOfLines={3} style={styles.adressTxt}>ave 20 agdal rabat ave 20 agdal rabatave 20 agdal rabatave 20 agdal rabat</Text>
+        <Text numberOfLines={2} style={styles.adressTxt}>ave 20 agdal rabat ave 20 agdal rabatcave 20 agdal rabat ave 20 agdal rabat</Text>
       </View>
       </View>
         <TouchableOpacity>
@@ -102,12 +104,24 @@ const ListFooterComponent = () =>(
 <TouchableOpacity style={styles.buttonCheckOut}
     onPress={
       ()=>{
-        Alert.alert("Still in progress mode")
+        dispatch(addCommand({products: products, 
+          details:
+          {adress: "ave 20 agdal rabat ave 20 agdal rabatcave 20 agdal rabat ave 20 agdal rabat",
+          date: "12/05/2022", 
+          commandId: "#12345", 
+          price: totalPrice + 100,
+          status:'Ready'
+          }}));
+
+        dispatch(initializeProducts())
+        totalPriceFunction();
+        Alert.alert("Command was added","Please check your commands",[{text:"CHECK", onPress: ()=>{navigation.navigate("Commands")}}, {text:"NO NEED"}])
       }
     }
     >
       <Text style={styles.BtnText}>CHECKOUT(${totalPrice + 100})</Text>
 </TouchableOpacity>
+
   </View>
 )
 
@@ -125,7 +139,7 @@ const ListFooterComponent = () =>(
 
 
 
-const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,productPrice,productName,quantity}) => (
+const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,productPrice,productName,quantity,quantityToken}) => (
   
   <View
       
@@ -170,32 +184,39 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
         </Text>
         
         <Text style={styles.price}>&#8377; {productPrice}</Text>
-        <Text style={styles.price}>Quantity: {quantityById(id).quantityOrigin}</Text>
+        <Text style={styles.price}>Quantity: {quantity}</Text>
         <View style={styles.cart}>
             
-              <TouchableOpacity style={[styles.button,{opacity: quantityById(id).quantityToken === 1? 0.4 : 1}]}
-              disabled={quantityById(id).quantityToken === 1? true : false}
+              <TouchableOpacity style={[styles.button,{opacity: quantityToken === 1? 0.4 : 1}]}
+              disabled={quantityToken === 1? true : false}
               //minimizer quantité par 1
               onPress={
                 ()=>{
-                  const el = (element) => element.id == id
+                  //const el = (element) => element.productID == id
                 
-                dispatch(minProduct(products.findIndex(el)))
+                //dispatch(minProduct(quantites.findIndex(el)))
+
+                dispatch(minProduct(id))
+
+                totalPriceFunction();
                 }
               }
 
               >
                 <Text style={styles.btnText}>-</Text>
               </TouchableOpacity>
-              <Text style={styles.price}>{quantityById(id).quantityToken}</Text>
-              <TouchableOpacity style={[styles.button,{opacity: quantityById(id).quantityOrigin === 0? 0.4 : 1}]}
-              disabled={quantityById(id).quantityOrigin === 0? true : false}
+              <Text style={styles.price}>{quantityToken}</Text>
+              <TouchableOpacity style={[styles.button,{opacity: quantity === 0? 0.4 : 1}]}
+              disabled={quantity === 0? true : false}
               //maximizer quantité par 1
               onPress={
                 ()=>{
-                  const el = (element) => element.id == id
+                //   const el = (element) => element.productID == id
                 
-                dispatch(plusProduct(products.findIndex(el)))
+                // dispatch(plusProduct(quantites.findIndex(el)))
+
+                dispatch(plusProduct(id))
+                totalPriceFunction();
                 }
               }
 
@@ -212,9 +233,9 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
                   Alert.alert("Product removing","Are you sure you want to remove this product?",[{text: "Cancel",
                 onPress: ()=> console.log("cancel")},{text: "Yes", onPress: ()=>{
                   const el = (element) => element.id == id
-                
+                  
                 dispatch(deleteProduct(products.findIndex(el)))
-                dispatch(deleteQuantity(quantites.findIndex(el)))
+                
                 }}])
                   
                 }
@@ -243,6 +264,7 @@ return(
     productPrice={item.productPrice}
     productName={item.productName}
     quantity={item.quantity}
+    quantityToken={item.quantityToken}
     item={item}
     
     />
@@ -257,12 +279,28 @@ return(
 
 const totalPriceFunction = () =>{
   let somme = 0;
-  products.map((el)=> somme = somme + el.productPrice);
+  products.map((el)=> somme = somme + el.productPrice*el.quantityToken);
 
   setTotalPrice(somme);
 
 }
 
+
+
+
+const ListEmptyComponent = () =>(
+  <View style={styles.empty}>
+    <Text style={styles.emptyTxt}>This is your Cart, it's empty so  please go to add some products to check them out from here</Text>
+
+    <TouchableOpacity style={styles.buttonCheckOut}
+    onPress={()=>{
+      navigation.navigate("Home")
+    }}
+    >
+      <Text style={styles.BtnText}>LET'S GO   {'->'}</Text>
+    </TouchableOpacity>
+  </View>
+)
 
 
 
@@ -275,12 +313,12 @@ const totalPriceFunction = () =>{
   return ( 
 
     <SafeAreaView style={styles.container}>
+      
       <Header name='Cart' onPress={() => navigation.navigate('Home')}/>
-        
         <View style={styles.cnt}>
 
         
-          <View style={styles.flatView}>
+          
             <FlatList
                       data={products}
                       
@@ -288,10 +326,12 @@ const totalPriceFunction = () =>{
                       keyExtractor={item=>item.id}
                       maxToRenderPerBatch={5}
                       showsVerticalScrollIndicator={false}
+                      ListEmptyComponent={ListEmptyComponent}
+                      
                       ListFooterComponent={ListFooterComponent}
                       ListFooterComponentStyle={{marginVertical: 40}}
             />
-          </View>
+          
 
           
 

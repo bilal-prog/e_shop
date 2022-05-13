@@ -125,8 +125,15 @@ import { COLOURS } from '../../Components/database/Database'
         alignSelf: 'flex-end'
         
     },
-    flatView: {
-        marginBottom: 70
+    empty: {
+      width: '100%',
+      justifyContent: 'center',
+      marginVertical: 10
+    },
+    emptyTxt: {
+      color: COLOURS.black,
+      fontSize: 26,
+      textAlign: 'center'
     },
     price: {
       fontSize: 16,

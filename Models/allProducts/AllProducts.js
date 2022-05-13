@@ -22,7 +22,8 @@ export default function AllProducts({navigation,route}){
   const [available, setAvailable] = useState(false)
   const [product, setProduct] = useState({});
 
-  const quantites= useSelector((state) => state.global.quantites);
+  const products= useSelector((state) => state.global.products);
+
   const favorites= useSelector((state) => state.global.favorites);
 
   const dispatch = useDispatch();
@@ -161,24 +162,33 @@ const checkActive = (id) =>
               </View>
             )
           ) : null}
-          <Text style={styles.price}>&#8377; {productPrice}</Text>
+          {
+            isOff ?
+            <>
+              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>&#8377; {productPrice}</Text>
+              <Text style={styles.price} >&#8377; {parseInt(productPrice - (productPrice*offPercentage/100))}</Text>
+            </>
+            : 
+            <Text style={styles.price}>&#8377; {productPrice}</Text>
+          }
           
         </View>
       </View>
 
 
 <View style={styles.cart}>
+  
             <TouchableOpacity style={[styles.button,{opacity: !isAvailable? 0.5 : 1}]}
             disabled={!isAvailable}
             onPress={()=>{ 
               const el = (element) => element.productID === id
 
-              let check = quantites.findIndex(el)
+              let check = products.findIndex(el)
 
               if (check === -1) {
-
-                dispatch(addProduct(prod))
-                dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
+                isOff ? dispatch(addProduct({...prod,productPrice: parseInt(productPrice - (productPrice*offPercentage/100))}))
+                : dispatch(addProduct(prod))
+                
                 Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
               }else{
                 Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}]) 
@@ -186,18 +196,20 @@ const checkActive = (id) =>
              }}>
               <Text style={styles.btnText}>Add to cart</Text>
             </TouchableOpacity>
+        <View style={styles.buttons}>
             <TouchableOpacity style={[styles.cartBtn,{opacity: !isAvailable? 0.5 : 1}]}
             disabled={!isAvailable}
             onPress={()=>{
               
               const el = (element) => element.productID === id
 
-              let check = quantites.findIndex(el)
+              let check = products.findIndex(el)
 
               if (check === -1) {
 
-                dispatch(addProduct(prod))
-                dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
+                isOff ? dispatch(addProduct({...prod,productPrice: parseInt(productPrice - (productPrice*offPercentage/100))}))
+                : dispatch(addProduct(prod))
+                
                 Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
               }else{
                 Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}]) 
@@ -206,7 +218,7 @@ const checkActive = (id) =>
             }}>
               <Image source={require('../../Assets/Icons/cart.png')} style={styles.icon}/>
             </TouchableOpacity>
-
+        
             <TouchableOpacity
            onPress={()=>{
              if(favorites.length === 0){
@@ -236,6 +248,7 @@ const checkActive = (id) =>
             <Image style={styles.favorisIcon} source={require('../../Assets/Icons/favoris.png')} />
             }
           </TouchableOpacity>
+        </View>
           </View>
 
           </View>

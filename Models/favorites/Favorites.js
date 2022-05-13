@@ -32,7 +32,7 @@ export default function AllProducts({navigation,route}){
     
 
     const favorites = useSelector((state)=> state.global.favorites);
-    const quantites= useSelector((state) => state.global.quantites);
+    const products= useSelector((state) => state.global.products);
     
 
   // const getDataFromDB = async => {  
@@ -62,6 +62,7 @@ export default function AllProducts({navigation,route}){
           
           flexDirection: 'row',
           justifyContent: 'space-between',
+          
           
           
 
@@ -116,13 +117,21 @@ export default function AllProducts({navigation,route}){
               </View>
             )
           ) : null}
-          <Text style={styles.price}>&#8377; {productPrice}</Text>
+          {
+            isOff ?
+            <>
+              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>&#8377; {productPrice}</Text>
+              <Text style={styles.price} >&#8377; {parseInt(productPrice - (productPrice*offPercentage/100))}</Text>
+            </>
+            : 
+            <Text style={styles.price}>&#8377; {productPrice}</Text>
+          }
           <View style={styles.cart}>
             <TouchableOpacity style={styles.button}
             onPress={()=>{ 
               const el = (element) => element.productID === id
 
-              let check = quantites.findIndex(el)
+              let check = products.findIndex(el)
 
               if (check === -1) {
 
@@ -139,7 +148,7 @@ export default function AllProducts({navigation,route}){
             onPress={()=>{
               const el = (element) => element.productID === id
 
-              let check = quantites.findIndex(el)
+              let check = products.findIndex(el)
 
               if (check === -1) {
 
@@ -218,7 +227,7 @@ const handle = () => {
         
         
         
-                
+              
                 <FlatList
                   data={favorites}
                   
@@ -230,6 +239,7 @@ const handle = () => {
                   onEndReached={handle}
                   onEndReachedThreshold={0}
                   />
+              
 
             
     </SafeAreaView>

@@ -134,12 +134,18 @@ import { COLOURS } from '../../Components/database/Database'
           borderRadius:100
       },
       button: {
-          width: '50%',
+          width: '43%',
           height: 35,
           backgroundColor: COLOURS.green,
           borderRadius: 5,
           justifyContent: 'center',
           alignItems: 'center'
+
+      },
+      buttons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 100,
 
       },
       btnText: {

@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import styles from './ProductDetailsStyle';
 import { Items , COLOURS} from '../../Components/database/Database';
 import { useSelector, useDispatch } from 'react-redux';
-import {addProduct, addQuantity, minProduct} from '../../action';
+import {addProduct, plusProduct} from '../../action';
 
 
 
@@ -157,6 +157,9 @@ const dispatch = useDispatch();
                   <Image style={styles.link} source={require('../../Assets/Icons/link1.png')}/>
                 </TouchableOpacity>
               </View>
+
+              
+
               <Text style={styles.description}>{product.description}</Text>
               <View style={styles.adress}>
                 <View style={styles.adress2}>
@@ -165,23 +168,36 @@ const dispatch = useDispatch();
                   <Image style={styles.camionIcon} source={require('../../Assets/Icons/camion.png')}/>
                 </TouchableOpacity>
                 <View>
-                  <Text numberOfLines={3} style={styles.adressTxt}>ave 20 agdal rabat ave 20 agdal rabatave 20 agdal rabatave 20 agdal rabat</Text>
+                  <Text numberOfLines={2} style={styles.adressTxt}>ave 20 agdal rabat ave 20 agdal rabatave 20 agdal rabatave 20 agdal rabat</Text>
                 </View>
                 </View>
                   <TouchableOpacity style={styles.chevronBtn}>
                     <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
                   </TouchableOpacity>
               </View>
-              <Text style={styles.price}>$ {product.productPrice}</Text>
+              
+              {
+            product.isOff ?
+            <>
+              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>$ {product.productPrice}</Text>
+              <Text style={styles.price} >$ {parseInt(product.productPrice - (product.productPrice*product.offPercentage/100))}</Text>
+            </>
+            : <Text style={styles.price}>$ {product.productPrice}</Text>
+          }
+
               <Text style={styles.description}>Tax Rate 2%-$4.00(=$195.00)</Text>
-              <TouchableOpacity style={styles.button}
+              <TouchableOpacity style={[styles.button,{opacity: !product.isAvailable? 0.5 : 1}]}
+              disabled={!product.isAvailable}
               onPress={()=>{
               const el = (element) => element.productID === productID
 
-              let check = quantites.findIndex(el)
+              let check = products.findIndex(el)
               if (check == -1) {
-                dispatch(addProduct(product));
-                dispatch(addQuantity({productID: productID, quantityOrigin: product.quantity - 1, quantityToken: 1}))
+
+                product.isOff ? dispatch(addProduct({...product,productPrice:parseInt(product.productPrice - (product.productPrice*product.offPercentage/100))}))
+                : dispatch(addProduct(product))
+                
+                //dispatch(addQuantity({productID: productID, quantityOrigin: product.quantity - 1, quantityToken: 1}))
                 
                 Alert.alert("Product was added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])  
               }else{

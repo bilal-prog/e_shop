@@ -10,14 +10,16 @@ import { COLOURS } from '../../Components/database/Database'
         backgroundColor: COLOURS.white,
         paddingHorizontal: 16,
         justifyContent: 'center',
-        alignItems: 'center'
+        
+        
         
       },
       
       container3: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+       
       },
       container4: {
         
@@ -25,8 +27,20 @@ import { COLOURS } from '../../Components/database/Database'
         height: 120,
         flexDirection: 'column',
         justifyContent: 'center',
+       
         
       },
+      cnt: {
+        width: '100%',
+        
+        
+        backgroundColor: COLOURS.white,
+        
+        
+        justifyContent: 'center',
+        
+      },
+      
       header2: {
         color: COLOURS.black, 
         fontSize:22,
@@ -75,7 +89,8 @@ import { COLOURS } from '../../Components/database/Database'
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 8,
-        marginRight: '10%'
+        marginRight: '10%',
+        
           
       },
       cardContainer2: {
@@ -90,6 +105,7 @@ import { COLOURS } from '../../Components/database/Database'
         borderBottomRightRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
+        
           
       },
       solde: {

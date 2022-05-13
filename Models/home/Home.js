@@ -6,6 +6,7 @@ import styles from './HomeStyle';
 import Header from '../../Components/header/Header';
 import {activeFavorite, inactiveFavorite, setFavorisFalse, setFavorisTrue} from '../../action';
 import { useDispatch, useSelector } from 'react-redux';
+import configureStore from '../../store'
 
 
 //import { useSelector, useDispatch } from 'react-redux';
@@ -30,25 +31,29 @@ export default function Home({navigation}){
     const [add2, setAdd2] = useState(false);
     
     const dispatch = useDispatch();
+    //const favorites= configureStore().store.getState().global.favorites;
     const favorites= useSelector((state) => state.global.favorites);
+    const commands= useSelector((state) => state.global.commands);
     const productsStore= useSelector((state) => state.global.products);
 
 
     //get called on screen loads
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      getDataFromDB();
-    });
-
-    return unsubscribe;
-  }, [navigation]);
 
 
   // useEffect(() => {
-    
+  //   const unsubscribe = navigation.addListener('focus', () => {
   //     getDataFromDB();
+  //   });
+
+  //   return unsubscribe;
+  // }, [navigation]);
+
+
+  useEffect(() => {
     
-  // }, [numProducts]);
+      getDataFromDB();
+    
+  }, []);
 
 
   //get data from DB
@@ -169,7 +174,7 @@ setAccessory4(accessoryList4);
   const checkActive = (id) => 
   {
     
-    const index = favorites.findIndex((el)=>el.id === id)
+    const index = favorites?.findIndex((el)=>el.id === id)
       
       if (index !== -1) {
         return true
@@ -296,8 +301,16 @@ setAccessory4(accessoryList4);
           )
         ) : null}
         <View style={styles.priceFavoris}>
-          <Text style={styles.price}>&#8377; {productPrice}</Text>
           
+          {
+            isOff ?
+            <>
+              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>&#8377; {productPrice}</Text>
+              <Text style={styles.price} >&#8377; {parseInt(productPrice - (productPrice*offPercentage/100))}</Text>
+            </>
+            : 
+            <Text style={styles.price}>&#8377; {productPrice}</Text>
+          }
 
           <TouchableOpacity
            onPress={()=>{
@@ -387,12 +400,12 @@ const renderItem = ({item}) => {
 
   return ( 
 
-    <View style={[styles.container]}>
+    <SafeAreaView style={[styles.container]}>
         <StatusBar backgroundColor={COLOURS.white} barStyle="dark-content" />
         <ScrollView showsVerticalScrollIndicator={false} style={{height:"100%", width: '100%'}}
           
         >
-        <Header name='Home' badgeShoppingBag={10} badgeCart={productsStore.length} onPress={()=>{navigation.navigate("Cart")}}/>
+        <Header name='Home' badgeShoppingBag={commands.length} badgeCart={productsStore.length} onPress={()=>{navigation.navigate("Cart")}} onPress2={()=>{navigation.navigate("Commands")}}/>
         
         
         <View style={styles.container2}>
@@ -517,7 +530,7 @@ const renderItem = ({item}) => {
         </View>
         </ScrollView>
         
-    </View>
+    </SafeAreaView>
    );
 }
  

@@ -12,6 +12,7 @@ import Favorites from "./Models/favorites/Favorites";
 
 import ProductDetails from "./Models/productDetails/ProductDetails"
 import AllProducts from "./Models/allProducts/AllProducts"
+import Commands from "./Models/commands/Commands"
 
 import { Provider } from "react-redux";
 //import { store, persistor } from "./redux/store";
@@ -36,6 +37,7 @@ const TabNavigator = (props) => {
   
 
   const products= useSelector((state) => state.global.products);
+  const commands= useSelector((state) => state.global.commands);
   const favorites= useSelector((state) => state.global.favorites);
   
   // console.log(configureStore().store.getState().global.products);
@@ -45,7 +47,7 @@ const TabNavigator = (props) => {
   let profileBadge=11;
   let homeBadge=products.length;
   let favoriteBadge=favorites.length;
-  let cartBadge=products.length;
+  let cartBadge=products.length + commands.length;
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -76,7 +78,7 @@ const TabNavigator = (props) => {
           }
 
           return( 
-          <View>
+          <View style={{padding: 20}}>
 
             <Image source={iconName}style={[{width: width, height: height, }]}/>
             
@@ -173,6 +175,11 @@ export default function App(){
             <Stack.Screen 
             name="AllProducts" 
             component={AllProducts}
+            
+            />
+            <Stack.Screen 
+            name="Commands" 
+            component={Commands}
             
             />
             

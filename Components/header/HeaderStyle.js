@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     },
     iconsContainer: {
        paddingHorizontal: 10,
+      
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -42,14 +43,21 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     icon: {
-        width:20,
-        height: 20,
+        width:25,
+        height: 25,
         margin: 10
     },
     textHeader: {
         fontSize: 20,
         color: COLOURS.black,
-        marginLeft: 20
+        
+        textAlign: 'center'
+    },
+    textCartHeader: {
+        fontSize: 20,
+        color: COLOURS.black,
+        
+        
     },
     text: {
         color: '#0F1828',
@@ -66,7 +74,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E94242',
         width:18,
         height: 18,
-        borderRadius: 100,
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center'
     },

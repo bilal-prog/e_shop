@@ -57,6 +57,20 @@ export const addProduct = (payload) => dispatch => {
       
     })
   }
+  export const initializeProducts = () => dispatch => {
+    
+    dispatch({
+      type:"INITIALIZE_PRODUCTS",
+      
+    })
+  }
+  export const initializeQuantites = () => dispatch => {
+    console.log("initialize");
+    dispatch({
+      type:"INITIALIZE_PRODUCTS",
+      
+    })
+  }
   export const deleteProduct = (payload) => dispatch => {
     dispatch({
       type:"DELETE_PRODUCT",
@@ -66,6 +80,14 @@ export const addProduct = (payload) => dispatch => {
   export const deleteQuantity = (payload) => dispatch => {
     dispatch({
       type:"DELETE_QUANTITY",
+      payload: payload
+    })
+  }
+
+
+  export const addCommand = (payload) => dispatch => {
+    dispatch({
+      type:"ADD_COMMAND",
       payload: payload
     })
   }

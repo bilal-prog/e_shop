@@ -16,6 +16,7 @@ export const Items = [
     productName: 'MI Super Bass Bluetooth Wireless Headphones',
     productPrice: 1799,
     quantity: 10,
+    quantityToken:1,
     description:
       'Up to 20 hours battery life | Super powerful Bass | 40mm dynamic driver | Pressure less ear muffs | Bluetooth 5.0 | Voice control',
     isOff: true,
@@ -35,6 +36,7 @@ export const Items = [
     productName: 'boAt Rockerz 450 Bluetooth Headphone',
     productPrice: 1499,
     quantity: 20,
+    quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
     isOff: true,
@@ -53,6 +55,7 @@ export const Items = [
     productName: 'boAt Airdopes 441',
     productPrice: 1999,
     quantity: 30,
+    quantityToken:1,
     description:
       'Bluetooth: It has Bluetooth v5.0 with a range of 10m and is compatible with Android & iOS',
     isOff: true,
@@ -71,6 +74,7 @@ export const Items = [
     productName: 'boAt Bassheads 242',
     productPrice: 399,
     quantity: 40,
+    quantityToken:1,
     description:
       'Fly into your workouts with precise tones that inspire and energize your system with its HD sound, all the time.',
     isOff: false,
@@ -88,6 +92,7 @@ export const Items = [
     productName: 'boAt Rockerz 255 Pro+',
     productPrice: 1499,
     quantity: 50,
+    quantityToken:1,
     description:
       'The unbeatable boAt signature sound shines through no matter what are you playing courtesy its 10mm drivers.',
     isOff: false,
@@ -105,6 +110,7 @@ export const Items = [
     productName: 'Boult Audio AirBass Propods TWS',
     productPrice: 1299,
     quantity: 60,
+    quantityToken:1,
     description:
       'One Touch Control & Voice Assistant: With one multifunction button, you can play/pause, previous/next track and answer/hang-up calls.Voice assistant function lets you access siri/Google Assistant',
     isOff: true,
@@ -122,6 +128,8 @@ export const Items = [
     category: 'product',
     productName: 'boAt Rockerz 450 Bluetooth Headphone',
     productPrice: 1499,
+    quantity: 5,
+    quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
     isOff: false,
@@ -139,6 +147,7 @@ export const Items = [
     productName: 'boAt Rockerz 450 Bluetooth Headphone',
     productPrice: 1499,
     quantity: 70,
+    quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
     isOff: false,
@@ -156,6 +165,7 @@ export const Items = [
     productName: 'boAt Rockerz 450 Bluetooth Headphone',
     productPrice: 1499,
     quantity: 80,
+    quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
     isOff: false,
@@ -173,6 +183,7 @@ export const Items = [
     productName: 'boAt Rockerz 450 Bluetooth Headphone',
     productPrice: 1499,
     quantity: 45,
+    quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
     isOff: false,
@@ -190,6 +201,7 @@ export const Items = [
     productName: 'boAt Rockerz 450 Bluetooth Headphone',
     productPrice: 1499,
     quantity: 55,
+    quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
     isOff: false,
@@ -207,6 +219,7 @@ export const Items = [
     productName: 'boAt Airdopes 441',
     productPrice: 1999,
     quantity: 65,
+    quantityToken:1,
     description:
       'Bluetooth: It has Bluetooth v5.0 with a range of 10m and is compatible with Android & iOS',
     isOff: true,
@@ -225,6 +238,7 @@ export const Items = [
     productName: 'boAt Bassheads 242',
     productPrice: 399,
     quantity: 75,
+    quantityToken:1,
     description:
       'Fly into your workouts with precise tones that inspire and energize your system with its HD sound, all the time.',
     isOff: false,
@@ -242,6 +256,7 @@ export const Items = [
     productName: 'boAt Rockerz 255 Pro+',
     productPrice: 1499,
     quantity: 85,
+    quantityToken:1,
     description:
       'The unbeatable boAt signature sound shines through no matter what are you playing courtesy its 10mm drivers.',
     isOff: false,
@@ -259,6 +274,7 @@ export const Items = [
     productName: 'Boult Audio AirBass Propods TWS',
     productPrice: 1299,
     quantity: 95,
+    quantityToken:1,
     description:
       'One Touch Control & Voice Assistant: With one multifunction button, you can play/pause, previous/next track and answer/hang-up calls.Voice assistant function lets you access siri/Google Assistant',
     isOff: true,
@@ -277,6 +293,7 @@ export const Items = [
     productName: 'boAt Airdopes 441',
     productPrice: 1999,
     quantity: 15,
+    quantityToken:1,
     description:
       'Bluetooth: It has Bluetooth v5.0 with a range of 10m and is compatible with Android & iOS',
     isOff: true,
@@ -295,6 +312,7 @@ export const Items = [
     productName: 'boAt Bassheads 242',
     productPrice: 399,
     quantity: 25,
+    quantityToken:1,
     description:
       'Fly into your workouts with precise tones that inspire and energize your system with its HD sound, all the time.',
     isOff: false,
@@ -312,6 +330,7 @@ export const Items = [
     productName: 'boAt Rockerz 255 Pro+',
     productPrice: 1499,
     quantity: 35,
+    quantityToken:1,
     description:
       'The unbeatable boAt signature sound shines through no matter what are you playing courtesy its 10mm drivers.',
     isOff: false,
@@ -329,6 +348,7 @@ export const Items = [
     productName: 'Boult Audio AirBass Propods TWS',
     productPrice: 1299,
     quantity: 5,
+    quantityToken:1,
     description:
       'One Touch Control & Voice Assistant: With one multifunction button, you can play/pause, previous/next track and answer/hang-up calls.Voice assistant function lets you access siri/Google Assistant',
     isOff: true,
