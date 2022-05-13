@@ -83,6 +83,33 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         margin: 10
+    },
+    languageText: {
+        fontSize: 10,
+        color: COLOURS.black
+    },
+    languageView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    radioView: {
+        width: 60,
+        height: 20,
+        borderColor: COLOURS.black,
+        borderWidth: 1,
+        borderRadius: 10,
+        marginHorizontal: 5,
+        justifyContent: 'center',
+        
+        padding: 2
+    },
+    radioContent: {
+        width: 15,
+        height: 15,
+        backgroundColor: COLOURS.backgroundDark,
+        borderRadius: 100,
+
     }
     
     

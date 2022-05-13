@@ -137,9 +137,9 @@ export default function AllProducts({navigation,route}){
 
                 dispatch(addProduct(prod))
                 dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
-                Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
+                Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
               }
              }}>
               <Text style={styles.btnText}>Add to cart</Text>
@@ -154,9 +154,9 @@ export default function AllProducts({navigation,route}){
 
                 dispatch(addProduct(prod))
                 dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
-                Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
+                Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it") 
+                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
               }
             }}>
               <Image source={require('../../Assets/Icons/cart.png')} style={styles.icon}/>
@@ -213,6 +213,19 @@ const handle = () => {
 
 
 
+const ListEmptyComponent = () =>(
+  <View style={styles.empty}>
+    <Text style={styles.emptyTxt}>This is your Cart, it's empty so  please go to add some products to check them out from here</Text>
+
+    <TouchableOpacity style={styles.buttonCheckOut}
+    onPress={()=>{
+      navigation.navigate("Home")
+    }}
+    >
+      <Text style={styles.BtnText}>LET'S GO   {'->'}</Text>
+    </TouchableOpacity>
+  </View>
+)
 
 
 
@@ -235,6 +248,7 @@ const handle = () => {
                   keyExtractor={item=>item.id}
                   maxToRenderPerBatch={5}
                   showsVerticalScrollIndicator={false}
+                  ListEmptyComponent={ListEmptyComponent}
                   ListFooterComponent={renderFooter}
                   onEndReached={handle}
                   onEndReachedThreshold={0}

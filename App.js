@@ -45,9 +45,9 @@ const TabNavigator = (props) => {
   // dispatch(addProduct({nom:"hamdi"}))
    console.log(JSON.stringify(configureStore().store.getState().global.products.length));
   let profileBadge=11;
-  let homeBadge=products.length;
+  let homeBadge=products.length+ commands.length;
   let favoriteBadge=favorites.length;
-  let cartBadge=products.length + commands.length;
+  let cartBadge=products.length ;
   return (
     <Tab.Navigator
       initialRouteName="Home"

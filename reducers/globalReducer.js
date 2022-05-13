@@ -9,6 +9,7 @@
     quantites: [],
     favorites: [],
     commands: [],
+    language: 'english'
   };
   
   /**
@@ -19,6 +20,8 @@
   export default function globalReducer(state = initialState, action) {
     
     switch (action.type) {
+      case 'SET_LANG':
+        return {...state, language: action.payload}
       case 'ADD_PRODUCT':
         return {...state,products: [...state.products,action.payload]};
       case 'ADD_COMMAND':

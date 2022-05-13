@@ -91,3 +91,10 @@ export const addProduct = (payload) => dispatch => {
       payload: payload
     })
   }
+
+  export const setLang = (payload) => dispatch => {
+    dispatch({
+      type:"SET_LANG",
+      payload: payload
+    })
+  }

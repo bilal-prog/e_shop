@@ -189,9 +189,11 @@ const dispatch = useDispatch();
               <TouchableOpacity style={[styles.button,{opacity: !product.isAvailable? 0.5 : 1}]}
               disabled={!product.isAvailable}
               onPress={()=>{
-              const el = (element) => element.productID === productID
+              const el = (element) => element.id === product.id
 
               let check = products.findIndex(el)
+              console.log("check"+JSON.stringify(products));
+              console.log("check"+check);
               if (check == -1) {
 
                 product.isOff ? dispatch(addProduct({...product,productPrice:parseInt(product.productPrice - (product.productPrice*product.offPercentage/100))}))
@@ -199,9 +201,9 @@ const dispatch = useDispatch();
                 
                 //dispatch(addQuantity({productID: productID, quantityOrigin: product.quantity - 1, quantityToken: 1}))
                 
-                Alert.alert("Product was added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])  
+                Alert.alert("Product was added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])  
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}]) 
+                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
               }
               
               }}>

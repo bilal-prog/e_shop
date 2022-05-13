@@ -1,7 +1,8 @@
 import { SafeAreaView,TextInput, Text, ScrollView, View,Image,TouchableOpacity } from 'react-native';
-import React, {useState} from 'react';
-
+import React, {useState,useEffect} from 'react';
+import { setLang } from '../../action';
 import styles from './HeaderStyle';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -9,11 +10,29 @@ import styles from './HeaderStyle';
 
 export default function Header(props){
 
-    const [iconBack, setIxonBack] = useState('#9999')
-    const [height, setHeight] = useState()
+    const [iconBack, setIxonBack] = useState('#9999');
+    const [langg,setLangg] = useState();
+
+    const dispatch = useDispatch();
+    const language = useSelector((state)=> state.global?.language);
+    console.log(JSON.stringify(language));
+
+
+
+    useEffect(() => {
+     dispatch(setLang(language))
+      
+    }, [language]);
+
+
 
     
   
+
+    
+
+
+
 
 
 
@@ -22,7 +41,7 @@ export default function Header(props){
 
   return ( 
     <View style={[styles.headerContainer]}>
-      {props?.name=="Home" 
+      {props?.name === "Home" || props?.name === "الصفحة الرئيسية"
       ?
 
       
@@ -39,6 +58,35 @@ export default function Header(props){
       </TouchableOpacity>
 
       <Text style={styles.textHeader}>{props?.name}</Text>
+
+      <View style={styles.languageView}>
+        <Text style={styles.languageText}>English</Text>
+        
+          <TouchableOpacity 
+          onPress={
+            ()=>{
+              console.log(language);
+              if(language === "arabe"){
+                console.log("if1");
+                dispatch(setLang("english"))
+                setLangg("english")
+              }else if(language == "english"){
+                console.log("if2");
+                dispatch(setLang("arabe"))
+                setLangg("arabe")
+              }
+              console.log(language);
+            }
+            
+            
+          }>
+            <View style={[styles.radioView,{alignItems: langg === "arabe" ? 'flex-end': 'flex-start'}]}>
+              <View style={styles.radioContent}/>
+            </View>
+          </TouchableOpacity>
+
+        <Text style={styles.languageText}>عربي</Text>
+      </View>
           
       <TouchableOpacity onPress={props?.onPress} style={[styles.iconBack,{backgroundColor: props?.badgeCart > 0 ? iconBack : (null)}]}>
           <Image source={require('../../Assets/Icons/cart.png')} style={styles.icon}/>

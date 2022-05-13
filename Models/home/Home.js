@@ -2,6 +2,7 @@ import { SafeAreaView,TextInput,FlatList,StatusBar, Text, ScrollView, View,Image
 import React, {useState, useEffect} from 'react';
 
 import {COLOURS, Items} from '../../Components/database/Database'
+import { HomeStrings } from '../../Components/database/Strings';
 import styles from './HomeStyle';
 import Header from '../../Components/header/Header';
 import {activeFavorite, inactiveFavorite, setFavorisFalse, setFavorisTrue} from '../../action';
@@ -26,15 +27,15 @@ export default function Home({navigation}){
     const [accessory2, setAccessory2] = useState([]);
     const [accessory3, setAccessory3] = useState([]);
     const [accessory4, setAccessory4] = useState([]);
-    const [numProducts, setNumProducts] = useState(false);
-    const [numAccessories, setNumAccessories] = useState(false);
-    const [add2, setAdd2] = useState(false);
+    const [lang,setLangg] = useState();
+    const [name, setName] = useState('الصفحة الرئيسية')
     
     const dispatch = useDispatch();
     //const favorites= configureStore().store.getState().global.favorites;
     const favorites= useSelector((state) => state.global.favorites);
     const commands= useSelector((state) => state.global.commands);
     const productsStore= useSelector((state) => state.global.products);
+    const language = useSelector((state)=> state.global?.language);
 
 
     //get called on screen loads
@@ -54,6 +55,18 @@ export default function Home({navigation}){
       getDataFromDB();
     
   }, []);
+
+  useEffect(() => {
+
+    getDataFromDB();
+    setLangg(language)
+
+    if(language == 'arabe'){setName('الصفحة الرئيسية')}
+    else{ setName('Home')}
+
+    console.log("lang:    "+lang);
+     
+   }, [language]);
 
 
   //get data from DB
@@ -397,7 +410,6 @@ const renderItem = ({item}) => {
 
 
 
-
   return ( 
 
     <SafeAreaView style={[styles.container]}>
@@ -405,25 +417,22 @@ const renderItem = ({item}) => {
         <ScrollView showsVerticalScrollIndicator={false} style={{height:"100%", width: '100%'}}
           
         >
-        <Header name='Home' badgeShoppingBag={commands.length} badgeCart={productsStore.length} onPress={()=>{navigation.navigate("Cart")}} onPress2={()=>{navigation.navigate("Commands")}}/>
+        <Header name={name} badgeShoppingBag={commands.length} badgeCart={productsStore.length} onPress={()=>{navigation.navigate("Cart")}} onPress2={()=>{navigation.navigate("Commands")}}/>
         
         
         <View style={styles.container2}>
             <View style={styles.row}> 
-                <Text style={styles.header2}>Bilal Shop &amp; Service</Text>
-                <Text style={styles.header3}>
-                    Audio shop on Agdal Ave 57.
-                    {'\n'}This shop offers both products and services.
-                </Text>
+                <Text style={styles.header2}>{lang === "arabe" ? HomeStrings.title.arabeText : HomeStrings.title.englishText}</Text>
+                <Text style={styles.header3}>{lang === "arabe" ? HomeStrings.description.arabeText : HomeStrings.description.englishText}</Text>
             </View>
             <View>
                 <View style={styles.container3}>
                     <View style={styles.flatHeader}>
-                    <Text style={styles.flatHeaderText}>Products</Text>
+                    <Text style={styles.flatHeaderText}>{lang === "arabe" ? HomeStrings.flatHeader.arabeText : HomeStrings.flatHeader.englishText}</Text>
                     <Text style={[styles.flatLength,{}]}>{products.length}</Text>
                     </View>
                     <TouchableOpacity onPress={() => { navigation.navigate('AllProducts', {list: products2,title: 'All Products'})}}>
-                        <Text style={styles.seeAll}>See all</Text>
+                        <Text style={styles.seeAll}>{lang === "arabe" ? HomeStrings.seeAll.arabeText : HomeStrings.seeAll.englishText}</Text>
                     </TouchableOpacity>
                 </View>
                 <FlatList
@@ -442,11 +451,11 @@ const renderItem = ({item}) => {
             <View>
                 <View style={styles.container3}>
                     <View style={styles.flatHeader}>
-                    <Text style={styles.flatHeaderText}>Accessory</Text>
+                    <Text style={styles.flatHeaderText}>{lang === "arabe" ? HomeStrings.flatHeader2.arabeText : HomeStrings.flatHeader2.englishText}</Text>
                     <Text style={[styles.flatLength,{}]}>{accessory.length}</Text>
                     </View>
                     <TouchableOpacity onPress={() => navigation.navigate('AllProducts', {list: accessory2,title: 'All Accessories'})}>
-                        <Text style={styles.seeAll}>See all</Text>
+                        <Text style={styles.seeAll}>{lang === "arabe" ? HomeStrings.seeAll.arabeText : HomeStrings.seeAll.englishText}</Text>
                     </TouchableOpacity>
                 </View>
                 <FlatList
@@ -478,11 +487,11 @@ const renderItem = ({item}) => {
 <View>
                 <View style={styles.container3}>
                     <View style={styles.flatHeader}>
-                    <Text style={styles.flatHeaderText}>Products</Text>
+                    <Text style={styles.flatHeaderText}>{lang === "arabe" ? HomeStrings.flatHeader.arabeText : HomeStrings.flatHeader.englishText}</Text>
                     <Text style={[styles.flatLength,{}]}>{products.length}</Text>
                     </View>
                     <TouchableOpacity onPress={() => navigation.navigate('AllProducts', {list: products2,title: 'All Products'})}>
-                        <Text style={styles.seeAll}>See all</Text>
+                        <Text style={styles.seeAll}>{lang === "arabe" ? HomeStrings.seeAll.arabeText : HomeStrings.seeAll.englishText}</Text>
                     </TouchableOpacity>
                 </View>
                 <FlatList
@@ -501,11 +510,11 @@ const renderItem = ({item}) => {
             <View>
                 <View style={styles.container3}>
                     <View style={styles.flatHeader}>
-                    <Text style={styles.flatHeaderText}>Accessory</Text>
+                    <Text style={styles.flatHeaderText}>{lang === "arabe" ? HomeStrings.flatHeader2.arabeText : HomeStrings.flatHeader2.englishText}</Text>
                     <Text style={[styles.flatLength,{}]}>{accessory.length}</Text>
                     </View>
                     <TouchableOpacity onPress={() => navigation.navigate('AllProducts', {list: accessory2,title: 'All Accessories'})}>
-                        <Text style={styles.seeAll}>See all</Text>
+                        <Text style={styles.seeAll}>{lang === "arabe" ? HomeStrings.seeAll.arabeText : HomeStrings.seeAll.englishText}</Text>
                     </TouchableOpacity>
                 </View>
                 <FlatList

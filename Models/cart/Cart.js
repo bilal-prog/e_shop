@@ -6,7 +6,9 @@ import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { plusProduct,minProduct, deleteProduct, deleteQuantity, initializeProducts,addCommand} from '../../action';
-import {COLOURS} from '../../Components/database/Database'
+import {COLOURS} from '../../Components/database/Database';
+
+import moment from 'moment';
 
 
 
@@ -18,11 +20,15 @@ export default function Cart({navigation,route}){
 
 
 const [totalPrice, setTotalPrice] = useState(0)
-  
+
+
+const [date, setDate] = useState(new Date());
+const [dateFormat, setDateFormat] =useState(moment(date).format("DD/MM/YYYY HH:mm:ss"));
    
 
 
   const products= useSelector((state) => state.global?.products);
+  const commands= useSelector((state) => state.global?.commands);
   
   const dispatch = useDispatch();
 
@@ -33,6 +39,13 @@ const [totalPrice, setTotalPrice] = useState(0)
      
     totalPriceFunction();
   }, [products]);
+
+  useEffect(() => {
+     
+    idOfCommand();
+  }, [commands]);
+
+  
 
 // const indexById = (id) => {
   
@@ -104,14 +117,35 @@ const ListFooterComponent = () =>(
 <TouchableOpacity style={styles.buttonCheckOut}
     onPress={
       ()=>{
-        dispatch(addCommand({products: products, 
-          details:
-          {adress: "ave 20 agdal rabat ave 20 agdal rabatcave 20 agdal rabat ave 20 agdal rabat",
-          date: "12/05/2022", 
-          commandId: "#12345", 
-          price: totalPrice + 100,
-          status:'Ready'
-          }}));
+
+        if(commands.length === 0){
+          dispatch(addCommand({products: products, 
+            details:
+            {adress: "ave 20 agdal rabat ave 20 agdal rabatcave 20 agdal rabat ave 20 agdal rabat",
+            date: new Date(),
+             
+            commandId: 0, 
+            price: totalPrice + 100,
+            status:'New'
+            }}));
+        }else{
+          
+
+
+          dispatch(addCommand({products: products, 
+            details:
+            {adress: "ave 20 agdal rabat ave 20 agdal rabatcave 20 agdal rabat ave 20 agdal rabat",
+            date: new Date(),
+             
+            commandId: idOfCommand() + 1, 
+            price: totalPrice + 100,
+            status:'New'
+            }}));
+        }
+
+
+
+        
 
         dispatch(initializeProducts())
         totalPriceFunction();
@@ -275,7 +309,14 @@ return(
 
 
 
+const idOfCommand = () =>{
+  let idC = 0;
 
+  
+  commands.map((el)=> idC = el.details.commandId);
+
+  return idC;
+}
 
 const totalPriceFunction = () =>{
   let somme = 0;

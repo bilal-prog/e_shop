@@ -61,18 +61,18 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     firstHalf: {
-        width: '60%',
+        width: '70%',
     },
     idDate: {
         
-        flexDirection: 'row',
-        justifyContent: 'space-between'
+        flexDirection: 'column',
+        
 
     },
     cardTxtAdress: {
         color: COLOURS.black,
         fontSize: 15,
-        marginBottom: 10
+        marginVertical: 10
     },
     cardTxtPrice: {
         color: COLOURS.black,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     },
     statusTxt2: {
         fontSize: 20,
-        color: COLOURS.black,
+        color: 'orange',
         fontWeight: '600'
     },
     statusTxt3: {

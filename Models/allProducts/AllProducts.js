@@ -181,7 +181,7 @@ const checkActive = (id) =>
             <TouchableOpacity style={[styles.button,{opacity: !isAvailable? 0.5 : 1}]}
             disabled={!isAvailable}
             onPress={()=>{ 
-              const el = (element) => element.productID === id
+              const el = (element) => element.id === id
 
               let check = products.findIndex(el)
 
@@ -189,9 +189,9 @@ const checkActive = (id) =>
                 isOff ? dispatch(addProduct({...prod,productPrice: parseInt(productPrice - (productPrice*offPercentage/100))}))
                 : dispatch(addProduct(prod))
                 
-                Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
+                Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}]) 
+                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
               }
              }}>
               <Text style={styles.btnText}>Add to cart</Text>
@@ -201,7 +201,7 @@ const checkActive = (id) =>
             disabled={!isAvailable}
             onPress={()=>{
               
-              const el = (element) => element.productID === id
+              const el = (element) => element.id === id
 
               let check = products.findIndex(el)
 
@@ -210,9 +210,9 @@ const checkActive = (id) =>
                 isOff ? dispatch(addProduct({...prod,productPrice: parseInt(productPrice - (productPrice*offPercentage/100))}))
                 : dispatch(addProduct(prod))
                 
-                Alert.alert("Product added", "Please check your Cart",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}])
+                Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "Ok",onPress: ()=>navigation.navigate("Cart")}]) 
+                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
               }
               
             }}>
