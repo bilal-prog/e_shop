@@ -18,15 +18,45 @@ export const addProduct = (payload) => dispatch => {
     })
   }
 
+  export const addCommandCopy = (payload) => dispatch => {
+    dispatch({
+      type:"ADD_COMMAND_COPY",
+      payload: payload
+    })
+  }
+
+  export const addCopyToCommand = (payload) => dispatch => {
+    dispatch({
+      type:"ADD_COPY_TO_COMMAND",
+      payload: payload,
+      
+    })
+  }
+
+  // return {...state,commands: [state.commands,state.commands[action.payload1],action.payload2]};
+
   export const minProduct = (payload) => dispatch => {
     dispatch({
       type:"MIN_PRODUCT",
       payload: payload
     })
   }
+  export const minProductCommand = (payload) => dispatch => {
+    dispatch({
+      type:"MIN_PRODUCT_COMMAND",
+      payload: payload
+    })
+  }
   export const plusProduct = (payload) => dispatch => {
     dispatch({
       type:"PLUS_PRODUCT",
+      payload: payload
+    })
+  }
+
+  export const plusProductCommand = (payload) => dispatch => {
+    dispatch({
+      type:"PLUS_PRODUCT_COMMAND",
       payload: payload
     })
   }
@@ -74,6 +104,12 @@ export const addProduct = (payload) => dispatch => {
   export const deleteProduct = (payload) => dispatch => {
     dispatch({
       type:"DELETE_PRODUCT",
+      payload: payload
+    })
+  }
+  export const deleteProductfromCommand = (payload) => dispatch => {
+    dispatch({
+      type:"DELETE_PRODUCT_FROM_COMMAND",
       payload: payload
     })
   }

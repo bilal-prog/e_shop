@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     },
       btnTxt: {
           color: COLOURS.white,
-          padding: 15,
-          fontSize: 15,
+          padding: 12,
+          fontSize: 12,
           fontWeight: '600'
       },
       button: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
       },
       cardTxtCommandDate: {
         color: COLOURS.black,
-        fontSize: 20
+        fontSize: 15
     },
     firstHalf: {
         width: '70%',

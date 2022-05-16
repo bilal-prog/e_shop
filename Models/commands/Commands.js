@@ -4,9 +4,10 @@ import { COLOURS } from '../../Components/database/Database';
 import Header from '../../Components/header/Header';
 
 import styles from './CommandsStyle';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import moment from 'moment';
+import { addCommandCopy } from '../../action';
 
 
 
@@ -17,20 +18,32 @@ export default function Commands({navigation}){
 
     const [realTimeDate, setRealTimeDate] = useState(new Date())
 
-    useEffect(()=>{
-        const interval = setInterval(()=>{
-            setRealTimeDate(new Date())
-        },100000);
-        return () => clearInterval(interval)
-    }, [])
+   
 
 
     
 
     
     const commands = useSelector((state)=>state.global.commands)
-    console.log(JSON.stringify(commands));
+    const commandCopy = useSelector((state)=>state.global.commandCopy)
+   
 
+    useEffect(()=>{
+        
+    },[commands])
+
+
+
+    useEffect(()=>{
+        const interval = setInterval(()=>{
+            setRealTimeDate(new Date())
+        },30000); //30 SECONDS TO RELOAD THE DATE
+        return () => clearInterval(interval)
+    }, [])
+
+    const dispatch = useDispatch()
+
+    
 
 
 
@@ -104,25 +117,30 @@ export default function Commands({navigation}){
 
 
 
-    const Item = ({commandId,date,adress,price,status}) => (
+    const Item = ({commandId,date,adress,price,status,item}) => (
         <View style={styles.card}>
             <View style={styles.card2}>
                 <View style={styles.firstHalf}>
                     <View style={styles.idDate}>
-                        <Text style={styles.cardTxtCommandId}>id: {commandId}</Text>
-                        <View>
-                            
-                            <Text style={styles.cardTxtCommandDate}>{setMinutesOrHoursOrDaysOrDate(date)}</Text>
-                        </View>
+                    
+                        <Text style={styles.cardTxtCommandDate}>{setMinutesOrHoursOrDaysOrDate(date)}</Text>
+                        
                     </View>
                     <Text style={styles.cardTxtAdress} numberOfLines={2}>{adress}</Text>
-                    <View>
-                        <Text style={styles.cardTxtPrice}>${price}</Text>
-                    </View>
+                    
+                        
+                    
                 </View>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.btnTxt}>DETAILS</Text>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity style={styles.button}
+                    onPress={()=>{
+                        navigation.navigate("Details",{commandId: commandId,status: checkStatus(checkDate(date,commandId)),time: setMinutesOrHoursOrDaysOrDate(date)})
+                        dispatch(addCommandCopy(item))
+                    }}>
+                        <Text style={styles.btnTxt}>DETAILS</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.cardTxtPrice}>${price}</Text>
+                </View>
             </View>
             <View style={styles.statusView}>
                 <View style={styles.statusView2}>

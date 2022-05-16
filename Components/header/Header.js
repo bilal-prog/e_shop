@@ -98,7 +98,7 @@ export default function Header(props){
       </TouchableOpacity>
       
       </View>
-      : props?.name=="All Products" || props?.name=="All Accessories" || props?.name=="Favorites" || props?.name=="Commands"
+      : props?.name=="All Products" || props?.name=="All Accessories" || props?.name=="Favorites" || props?.name=="Commands" || props?.name=="Details"
       ?
       <View style={styles.iconsContainer}>
         <TouchableOpacity onPress={props.onPress}>

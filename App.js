@@ -24,6 +24,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { addProduct } from "./action";
+import Details from "./Models/details/Details";
 
 
 
@@ -180,6 +181,11 @@ export default function App(){
             <Stack.Screen 
             name="Commands" 
             component={Commands}
+            
+            />
+            <Stack.Screen 
+            name="Details" 
+            component={Details}
             
             />
             
