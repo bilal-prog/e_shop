@@ -8,6 +8,7 @@ import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {addProduct,addQuantity} from '../../action';
+import { FavoritesStrings } from '../../Components/database/Strings';
 
 
 
@@ -18,6 +19,7 @@ export default function AllProducts({navigation,route}){
 
   
   const [isLoading, setIsLoading] = useState(false)
+  const language = useSelector((state)=> state.global.language)
   
 
   const dispatch = useDispatch();
@@ -120,14 +122,15 @@ export default function AllProducts({navigation,route}){
           {
             isOff ?
             <>
-              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>&#8377; {productPrice}</Text>
-              <Text style={styles.price} >&#8377; {parseInt(productPrice - (productPrice*offPercentage/100))}</Text>
+              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>{productPrice} DH</Text>
+              <Text style={styles.price} >{parseInt(productPrice - (productPrice*offPercentage/100))} DH</Text>
             </>
             : 
-            <Text style={styles.price}>&#8377; {productPrice}</Text>
+            <Text style={styles.price}>{productPrice} DH</Text>
           }
           <View style={styles.cart}>
-            <TouchableOpacity style={styles.button}
+            <TouchableOpacity style={[styles.button,{opacity: isAvailable ? 1 : 0.5}]}
+            disabled={!isAvailable}
             onPress={()=>{ 
               const el = (element) => element.productID === id
 
@@ -142,9 +145,10 @@ export default function AllProducts({navigation,route}){
                 Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
               }
              }}>
-              <Text style={styles.btnText}>Add to cart</Text>
+              <Text style={styles.btnText}>{language === "arabe" ? FavoritesStrings.addButton.arabeText : FavoritesStrings.addButton.englishText}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cartBtn}
+            <TouchableOpacity style={[styles.cartBtn,{opacity: isAvailable ? 1 : 0.5}]}
+            disabled={!isAvailable}
             onPress={()=>{
               const el = (element) => element.productID === id
 
@@ -236,26 +240,29 @@ const ListEmptyComponent = () =>(
   return ( 
 
     <SafeAreaView style={styles.container}>
-        <Header name={"Favorites"} onPress={() => navigation.navigate('Home')}/>
-        
-        
-        
-              
-                <FlatList
-                  data={favorites}
-                  
-                  renderItem={renderItem}
-                  keyExtractor={item=>item.id}
-                  maxToRenderPerBatch={5}
-                  showsVerticalScrollIndicator={false}
-                  ListEmptyComponent={ListEmptyComponent}
-                  ListFooterComponent={renderFooter}
-                  onEndReached={handle}
-                  onEndReachedThreshold={0}
-                  />
-              
-
+      <Header name1={language === "arabe" ? FavoritesStrings.pageHeader.arabeText : FavoritesStrings.pageHeader.englishText} name={"Favorites"} onPress={() => navigation.navigate('Home')}/>
+        <View style={styles.container2}>
+          
+          
+          
+          
+                
+          <FlatList
+            data={favorites}
             
+            renderItem={renderItem}
+            keyExtractor={item=>item.id}
+            maxToRenderPerBatch={5}
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={ListEmptyComponent}
+            ListFooterComponent={renderFooter}
+            onEndReached={handle}
+            onEndReachedThreshold={0}
+            />
+        
+
+      
+          </View>
     </SafeAreaView>
    );
 }

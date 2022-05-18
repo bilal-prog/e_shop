@@ -5,6 +5,7 @@ import { COLOURS } from '../database/Database';
 const styles = StyleSheet.create({
     headerContainer: {
         width: '100%',
+        height: 60,
        
         backgroundColor: '#FFFFFF',
         // position: 'absolute',
@@ -19,12 +20,22 @@ const styles = StyleSheet.create({
     },
     iconsContainer: {
        paddingHorizontal: 10,
-      
+        height: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         
+        
     },
+    iconsContainer2: {
+        paddingHorizontal: 10,
+         height: '100%',
+         flexDirection: 'row',
+         justifyContent: 'center',
+         alignItems: 'center',
+        
+         
+     },
     iconBack: {
         backgroundColor: COLOURS.white,
         padding:4,
@@ -40,7 +51,10 @@ const styles = StyleSheet.create({
         borderColor: '#9999',
         borderWidth: 1,
         width: 50,
-        marginLeft: 20
+        marginLeft: 20,
+        position: 'absolute',
+        left: 0,
+        
     },
     icon: {
         width:25,
@@ -51,7 +65,19 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: COLOURS.black,
         
-        textAlign: 'center'
+        textAlign: 'center',
+    },
+    textHeader2: {
+        fontSize: 20,
+        color: COLOURS.black,
+        
+        textAlign: 'center',
+        
+    },
+    chevronView:{
+        position: 'absolute',
+        left: 0,
+        padding: 10
     },
     textCartHeader: {
         fontSize: 20,
@@ -82,7 +108,8 @@ const styles = StyleSheet.create({
         
         width: 30,
         height: 30,
-        margin: 10
+        
+        
     },
     languageText: {
         fontSize: 10,

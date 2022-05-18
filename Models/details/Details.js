@@ -7,6 +7,7 @@ import Header from '../../Components/header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { plusProduct,minProduct, deleteProduct, deleteQuantity, initializeProducts,addCommand, plusProductCommand, minProductCommand, addCopyToCommand, deleteProductfromCommand} from '../../action';
 import {COLOURS} from '../../Components/database/Database';
+import { CartStrings, CommandsStrings } from '../../Components/database/Strings';
 
 import moment from 'moment';
 
@@ -25,13 +26,14 @@ const [totalPrice, setTotalPrice] = useState(0)
 const commandId = route.params?.commandId;
 const status = route.params?.status;
 const time = route.params?.time;
+const dateCommand = route.params?.date
 
 const [date, setDate] = useState(new Date());
 const [dateFormat, setDateFormat] =useState(moment(date).format("DD/MM/YYYY HH:mm:ss"));
    
 
 
-  
+  const language = useSelector((state)=> state.global?.language);
   const commandCopy = useSelector((state) => state.global?.commandCopy)
   const products = commandCopy.products
   
@@ -60,80 +62,86 @@ const [dateFormat, setDateFormat] =useState(moment(date).format("DD/MM/YYYY HH:m
 
 const ListFooterComponent = () =>(
   <View>
-    <Text style={styles.title}>Delivery Location</Text>
+    {status === "New" 
+    ?
+    <>
+        <Text style={styles.title}>{language === "arabe" ? CartStrings.deliveryLocation.arabeText : CartStrings.deliveryLocation.englishText}</Text>
 
-<View style={styles.adress}>
-      <View style={styles.adress2}>
+        <View style={styles.adress}>
+              <View style={styles.adress2}>
 
-      <TouchableOpacity style={styles.camion}>
-        <Image style={styles.camionIcon} source={require('../../Assets/Icons/camion.png')}/>
+              <TouchableOpacity style={styles.camion}>
+                <Image style={styles.camionIcon} source={require('../../Assets/Icons/camion.png')}/>
+              </TouchableOpacity>
+              <View>
+                <Text numberOfLines={2} style={styles.adressTxt}>ave 20 agdal rabat ave 20 agdal rabatcave 20 agdal rabat ave 20 agdal rabat</Text>
+              </View>
+              </View>
+                <TouchableOpacity>
+                  <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
+                </TouchableOpacity>
+        </View>
+
+        <Text style={styles.title}>{language === "arabe" ? CartStrings.payement.arabeText : CartStrings.payement.englishText}</Text>
+
+        <View style={styles.adress}>
+              <View style={styles.adress2}>
+
+              <TouchableOpacity style={styles.visa}>
+                <Image style={styles.visaIcon} source={require('../../Assets/Icons/visa.png')}/>
+              </TouchableOpacity>
+              <View>
+                <Text numberOfLines={3} style={styles.adressTxt}>VISA CLASSIC {'\n'}*****0921</Text>
+              </View>
+              </View>
+                <TouchableOpacity>
+                  <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
+                </TouchableOpacity>
+        </View>
+    </>
+      :(null)}
+      <View style={{marginBottom: 40}}/>
+
+      <Text style={styles.title}>{language === "arabe" ? CartStrings.total.arabeText : CartStrings.total.englishText}</Text>
+
+      <View style={[styles.totalView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+        <Text style={styles.total}>{language === "arabe" ? CartStrings.subTotal.arabeText : CartStrings.subTotal.englishText}</Text>
+        <Text style={styles.total}>{totalPrice} DH</Text>
+      </View>
+
+      <View style={[styles.totalView,{marginBottom: 45,flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+        <Text style={styles.total}>{language === "arabe" ? CartStrings.shippingCost.arabeText : CartStrings.shippingCost.englishText}</Text>
+        <Text style={styles.total}>+100</Text>
+      </View>
+
+      <View style={[styles.totalView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+        <Text style={styles.total}>{language === "arabe" ? CartStrings.total.arabeText : CartStrings.total.englishText}</Text>
+        <Text style={[styles.total,{color: COLOURS.black, fontWeight: '700', fontSize: 25}]}>{totalPrice + 100} DH</Text>
+      </View>
+
+      <TouchableOpacity style={[styles.buttonCheckOut,{opacity: status === "New" ? 1 : 0.5}]}
+        disabled={status === "New" ? false : true}
+          onPress={
+            ()=>{
+                
+
+                if(status === "New"){
+                  const commandCopyPrime = {...commandCopy};
+                  commandCopyPrime.details.price = totalPrice + 100
+                  dispatch(addCopyToCommand({...commandCopy}))
+
+                  Alert.alert("Command Was Modified","Please check your commands"+status,[{text:"CHECK", onPress: ()=>{navigation.navigate("Commands")}}, {text:"NO NEED"}])
+                }else{
+                  Alert.alert("Command Wasn't Modified !","Sorry you can't modify this command, it's already "+status,[{text:"OK"}])
+                }
+              
+
+
+              }
+          }
+          >
+            <Text style={styles.BtnText}>{language === "arabe" ? CartStrings.saveButton.arabeText : CartStrings.saveButton.englishText}</Text>
       </TouchableOpacity>
-      <View>
-        <Text numberOfLines={2} style={styles.adressTxt}>ave 20 agdal rabat ave 20 agdal rabatcave 20 agdal rabat ave 20 agdal rabat</Text>
-      </View>
-      </View>
-        <TouchableOpacity>
-          <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
-        </TouchableOpacity>
-</View>
-
-<Text style={styles.title}>Payement Method</Text>
-
-<View style={styles.adress}>
-      <View style={styles.adress2}>
-
-      <TouchableOpacity style={styles.visa}>
-        <Image style={styles.visaIcon} source={require('../../Assets/Icons/visa.png')}/>
-      </TouchableOpacity>
-      <View>
-        <Text numberOfLines={3} style={styles.adressTxt}>VISA CLASSIC {'\n'}*****0921</Text>
-      </View>
-      </View>
-        <TouchableOpacity>
-          <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
-        </TouchableOpacity>
-</View>
-<View style={{marginBottom: 40}}/>
-
-<Text style={styles.title}>Payement Method</Text>
-
-<View style={styles.totalView}>
-  <Text style={styles.total}>SubTotal</Text>
-  <Text style={styles.total}>${totalPrice}</Text>
-</View>
-
-<View style={[styles.totalView,{marginBottom: 45}]}>
-  <Text style={styles.total}>Shipping Cost</Text>
-  <Text style={styles.total}>+100</Text>
-</View>
-
-<View style={[styles.totalView,]}>
-  <Text style={styles.total}>Total</Text>
-  <Text style={[styles.total,{color: COLOURS.black, fontWeight: '700', fontSize: 25}]}>${totalPrice + 100}</Text>
-</View>
-
-<TouchableOpacity style={styles.buttonCheckOut}
-    onPress={
-      ()=>{
-          
-
-           if(status === "New"){
-            const commandCopyPrime = {...commandCopy};
-            commandCopyPrime.details.price = totalPrice + 100
-            dispatch(addCopyToCommand({...commandCopy}))
-
-            Alert.alert("Command Was Modified","Please check your commands"+status,[{text:"CHECK", onPress: ()=>{navigation.navigate("Commands")}}, {text:"NO NEED"}])
-           }else{
-            Alert.alert("Command Wasn't Modified !","Sorry you can't modify this command, it's already "+status,[{text:"OK"}])
-           }
-        
-
-
-        }
-    }
-    >
-      <Text style={styles.BtnText}>SAVE</Text>
-</TouchableOpacity>
 
   </View>
 )
@@ -196,8 +204,12 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
           {productName}
         </Text>
         
-        <Text style={styles.price}>&#8377; {productPrice}</Text>
-        <Text style={styles.price}>Quantity: {quantity}</Text>
+        <Text style={styles.price}>{productPrice} DH</Text>
+        {/* <Text style={styles.price}>Quantity: {quantity}</Text> */}
+
+        
+        { status === "New"
+        ?
         <View style={styles.cart}>
             
               <TouchableOpacity style={[styles.button,{opacity: quantityToken === 1? 0.4 : 1}]}
@@ -235,7 +247,10 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
             
             
         </View>
+        :(null)}
       </View>
+            {status === "New"
+            ?
             <TouchableOpacity style={styles.deleteBtn}
               onPress={
                 ()=>{
@@ -252,6 +267,7 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
             >
               <Image source={require('../../Assets/Icons/delete.png')} style={styles.icon}/>
             </TouchableOpacity>
+            : (null)}
     </View>
 );
 
@@ -304,62 +320,52 @@ const totalPriceFunction = () =>{
 
 
 
-const ListEmptyComponent = () =>(
+const ListHeaderComponent = () =>(
     <View style={styles.card}>
     <View style={styles.card2}>
         <View style={styles.firstHalf}>
-            <View style={styles.idDate}>
+            <View style={[styles.idDate,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+              <View style={[styles.rowView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+                <Text style={styles.Title}>#</Text>
+                <Text style={styles.cardTxtCommandDate}>{commandId}</Text>
+              </View>
             
-                <Text style={styles.cardTxtCommandDate}>{time}</Text>
+              <View style={styles.statusView}>
+                <Text style={styles.statusTxt1}>{
+                  status === "New" ?
+                  (language === "arabe" ? CommandsStrings.new.arabeText : CommandsStrings.new.englishText)
+                  : status === "On Dlivery"
+                  ?
+                  (language === "arabe" ? CommandsStrings.onDelivery.arabeText : CommandsStrings.onDelivery.englishText)
+                  : status === "Ready" 
+                  ? (language === "arabe" ? CommandsStrings.ready.arabeText : CommandsStrings.ready.englishText)
+                  : (null)
+                }</Text>
+              </View>
+                
                 
             </View>
-            <Text style={styles.cardTxtAdress} numberOfLines={2}>{commandCopy.details.adress}</Text>
+            <View style={[styles.rowView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+              <Text style={styles.Title}>{language === "arabe" ? CommandsStrings.date.arabeText : CommandsStrings.date.englishText}:   </Text>
+              <Text style={styles.cardTxtCommandDate}>{dateCommand} ({time})</Text>
+            </View>
+            <View style={styles.adressTextView}>
+              <Text style={styles.Title}>{language === "arabe" ? CommandsStrings.adress.arabeText : CommandsStrings.adress.englishText}:</Text>
+              <Text style={styles.cardTxtAdress} numberOfLines={2}>{commandCopy.details.adress}</Text>
+            </View>
+            <View style={[styles.rowView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+                <Text style={styles.Title}>{language === "arabe" ? CommandsStrings.price.arabeText : CommandsStrings.price.englishText}:  </Text>
+                <Text style={styles.Title}>{totalPrice +100} DH</Text>
+            </View>
+
+            <Text style={[styles.Title,{marginTop:20}]}>{language === "arabe" ? CommandsStrings.your.arabeText : CommandsStrings.your.englishText}:</Text>
             
                 
             
         </View>
         
     </View>
-    <View style={styles.statusView}>
-        <View style={styles.statusView2}>
-        {status === 'New' ? 
-            <View style={[styles.circle2,{borderWidth: 4,borderColor: COLOURS.green,height: 30,width: 30}]}>
-                <Image style={styles.icons} source={require('../../Assets/Icons/greenDone.png')}/>
-            </View>
-            :
-            <View style={[styles.circle2,{backgroundColor: COLOURS.green}]}/>
-        }
-            <Text style={styles.statusTxt1}>New</Text>
-        </View>
-
-        <View style={styles.statusView2}>
-        {status === 'OnDelivery' ? 
-        <>
-            
-            <View style={[styles.circle2,{borderWidth: 4,borderColor: 'orange',height: 30,width: 30,justifyContent: 'center',alignItems: 'center'}]}>
-                <Image style={styles.icons} source={require('../../Assets/Icons/blackDone.png')}/>
-            </View>
-        </>
-            :
-            <View style={[styles.circle2,{backgroundColor: 'orange'}]}/>
-        }
-            <Text style={styles.statusTxt2}>On Delivery</Text>
-        </View>
-
-        <View style={styles.statusView2}>
-        {status === 'Ready' ? 
-        <>
-            
-            <View style={[styles.circle2,{borderWidth: 4,borderColor: COLOURS.blue,height: 30,width: 30}]}>
-                <Image style={styles.icons} source={require('../../Assets/Icons/blueDone.png')}/>
-            </View>
-        </>
-            :
-            <View style={[styles.circle2,{backgroundColor: COLOURS.blue}]}/>
-        }
-            <Text style={styles.statusTxt3}>Ready</Text>
-        </View>
-    </View>
+    
     
 </View>
 )
@@ -388,7 +394,7 @@ const ListEmptyComponent = () =>(
                       keyExtractor={item=>item.id}
                       maxToRenderPerBatch={5}
                       showsVerticalScrollIndicator={false}
-                      ListHeaderComponent={ListEmptyComponent}
+                      ListHeaderComponent={ListHeaderComponent}
                       
                       ListFooterComponent={ListFooterComponent}
                       ListFooterComponentStyle={{marginVertical: 40}}

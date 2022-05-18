@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         flex:1,
-        backgroundColor: COLOURS.backgroundLight,
+        backgroundColor: COLOURS.white,
     },
     container2: {
         marginBottom:60, 
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
           marginVertical: 5,
           
           borderRadius: 10,
-          backgroundColor: COLOURS.white,
+          backgroundColor: '#cfe2f3',
         
           
          
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     cardTxtPrice: {
         color: COLOURS.black,
         fontSize: 25,
-        marginVertical: 5
+        marginVertical: 5,
+        fontWeight: '700'
     },
     circle: {
         height:8,
@@ -85,13 +86,17 @@ const styles = StyleSheet.create({
         borderRadius:100
     },
     circle2: {
-        height:12,
-        width:12,
-        borderRadius:100
+        height:20,
+        width:20,
+        borderRadius:100,
+        borderWidth: 2,
+        borderColor: COLOURS.black,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     icons: {
-        height: 20,
-        width: 20,
+        height: 15,
+        width: 15,
         alignSelf: 'center'
     },
     midleView: {
@@ -101,7 +106,7 @@ const styles = StyleSheet.create({
 
     },
     statusView: {
-        backgroundColor: COLOURS.backgroundLight,
+        backgroundColor: '#6FA8DC',
         height: 50,
         borderRadius: 10,
         flexDirection: 'row',
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     statusView3: {
-        backgroundColor: COLOURS.backgroundLight,
+        backgroundColor: '#6FA8DC',
         height: 50,
         borderRadius: 10,
         flexDirection: 'row',
@@ -125,19 +130,10 @@ const styles = StyleSheet.create({
     },
     statusTxt1: {
         fontSize: 20,
-        color: COLOURS.green,
-        fontWeight: '600'
+        color: COLOURS.black,
+        fontWeight: '400'
     },
-    statusTxt2: {
-        fontSize: 20,
-        color: 'orange',
-        fontWeight: '600'
-    },
-    statusTxt3: {
-        fontSize: 20,
-        color: COLOURS.blue,
-        fontWeight: '600'
-    }
+    
     
     
     

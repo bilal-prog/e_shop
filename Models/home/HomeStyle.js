@@ -139,7 +139,8 @@ import { COLOURS } from '../../Components/database/Database'
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'baseline'
-      }
+      },
+      
 });
 export default styles;
 

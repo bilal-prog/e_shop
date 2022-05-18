@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import moment from 'moment';
 import { addCommandCopy } from '../../action';
+import { CommandsStrings } from '../../Components/database/Strings';
 
 
 
@@ -23,7 +24,7 @@ export default function Commands({navigation}){
 
     
 
-    
+    const language = useSelector((state)=>state.global.language)
     const commands = useSelector((state)=>state.global.commands)
     const commandCopy = useSelector((state)=>state.global.commandCopy)
    
@@ -103,13 +104,13 @@ export default function Commands({navigation}){
         
 
         if(ss < 60 && mm === 0){
-            return "created in: "+ss+" seconds"
+            return ss+" seconds"
         }else if(mm < 60 && hh >= 1){
-            return "created in: "+mm+" minutes"
+            return mm+" mins"
         }else if(hh < 24 && d == 4){
-            return "created in: "+hh+" hours"
+            return hh+" hrs"
         }else if(dd >= 5){
-            return  "created in: "+moment(date).format("DD/MM/YYYY");
+            return  dd - 4 +" days";
         }
 
     }
@@ -118,72 +119,73 @@ export default function Commands({navigation}){
 
 
     const Item = ({commandId,date,adress,price,status,item}) => (
-        <View style={styles.card}>
-            <View style={styles.card2}>
+        <TouchableOpacity style={styles.card}
+        onPress={()=>{
+            navigation.navigate("Details",{commandId: commandId,status: checkStatus(checkDate(date,commandId)),time: setMinutesOrHoursOrDaysOrDate(date), date: moment(date).format("DD/MM/YYYY")})
+            dispatch(addCommandCopy(item))
+        }}>
+            <View style={[styles.card2,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
                 <View style={styles.firstHalf}>
-                    <View style={styles.idDate}>
-                    
-                        <Text style={styles.cardTxtCommandDate}>{setMinutesOrHoursOrDaysOrDate(date)}</Text>
+                    <View style={[styles.idDate,{justifyContent: language === "arabe" ? 'flex-end' : 'flex-start'}]}>
+                        <Text style={[styles.cardTxtCommandDate,{justifyContent: language === "arabe" ? 'flex-end' : 'flex-start'}]}># {commandId}</Text>
+                        <Text style={styles.cardTxtCommandDate}>{language === "arabe" ? CommandsStrings.date.arabeText : CommandsStrings.date.englishText}:     {moment(date).format("DD/MM/YYYY")} ({setMinutesOrHoursOrDaysOrDate(date)})</Text>
+                        
                         
                     </View>
-                    <Text style={styles.cardTxtAdress} numberOfLines={2}>{adress}</Text>
+                    
+                    <Text style={styles.cardTxtAdress} numberOfLines={2}>{language === "arabe" ? CommandsStrings.adress.arabeText : CommandsStrings.adress.englishText}:   {adress}</Text>
+
                     
                         
                     
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.button}
-                    onPress={()=>{
-                        navigation.navigate("Details",{commandId: commandId,status: checkStatus(checkDate(date,commandId)),time: setMinutesOrHoursOrDaysOrDate(date)})
-                        dispatch(addCommandCopy(item))
-                    }}>
-                        <Text style={styles.btnTxt}>DETAILS</Text>
-                    </TouchableOpacity>
+                    
                     <Text style={styles.cardTxtPrice}>${price}</Text>
                 </View>
             </View>
-            <View style={styles.statusView}>
+            <View style={[styles.statusView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
                 <View style={styles.statusView2}>
                 {checkStatus(checkDate(date,commandId)) === 'New' ? 
-                    <View style={[styles.circle2,{borderWidth: 4,borderColor: COLOURS.green,height: 30,width: 30}]}>
-                        <Image style={styles.icons} source={require('../../Assets/Icons/greenDone.png')}/>
+                    <View style={styles.circle2}>
+                        <Image style={styles.icons} source={require('../../Assets/Icons/blackDone.png')}/>
                     </View>
                     :
-                    <View style={[styles.circle2,{backgroundColor: COLOURS.green}]}/>
+                    (null)
                 }
-                    <Text style={styles.statusTxt1}>New</Text>
+                    <Text style={styles.statusTxt1}>{language === "arabe" ? CommandsStrings.new.arabeText : CommandsStrings.new.englishText}</Text>
                 </View>
 
                 <View style={styles.statusView2}>
                 {checkStatus(checkDate(date,commandId)) === 'OnDelivery' ? 
                 <>
                     
-                    <View style={[styles.circle2,{borderWidth: 4,borderColor: 'orange',height: 30,width: 30,justifyContent: 'center',alignItems: 'center'}]}>
+                    <View style={styles.circle2}>
                         <Image style={styles.icons} source={require('../../Assets/Icons/blackDone.png')}/>
                     </View>
                 </>
                     :
-                    <View style={[styles.circle2,{backgroundColor: 'orange'}]}/>
+                    (null)
                 }
-                    <Text style={styles.statusTxt2}>On Delivery</Text>
+                    <Text style={styles.statusTxt1}>{language === "arabe" ? CommandsStrings.onDelivery.arabeText : CommandsStrings.onDelivery.englishText}</Text>
                 </View>
 
                 <View style={styles.statusView2}>
                 {checkStatus(checkDate(date,commandId)) === 'Ready' ? 
                 <>
                     
-                    <View style={[styles.circle2,{borderWidth: 4,borderColor: COLOURS.blue,height: 30,width: 30}]}>
-                        <Image style={styles.icons} source={require('../../Assets/Icons/blueDone.png')}/>
+                    <View style={styles.circle2}>
+                        <Image style={styles.icons} source={require('../../Assets/Icons/blackDone.png')}/>
                     </View>
                 </>
                     :
-                    <View style={[styles.circle2,{backgroundColor: COLOURS.blue}]}/>
+                    (null)
                 }
-                    <Text style={styles.statusTxt3}>Ready</Text>
+                    <Text style={styles.statusTxt1}>{language === "arabe" ? CommandsStrings.ready.arabeText : CommandsStrings.ready.englishText}</Text>
                 </View>
             </View>
             
-        </View>
+        </TouchableOpacity>
     );
 
 
@@ -210,7 +212,7 @@ export default function Commands({navigation}){
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={COLOURS.white} barStyle="dark-content" />
-            <Header name="Commands" onPress={() => navigation.navigate('Home')}/>
+            <Header name="Commands" onPress={() => navigation.goBack()}/>
 
             <View style={styles.container2}>
             <FlatList

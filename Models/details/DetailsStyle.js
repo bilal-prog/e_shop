@@ -218,6 +218,16 @@ BtnText: {
   fontSize: 20,
   textAlign: 'center'
 },
+Title: {
+  fontSize: 20,
+  fontWeight: '500',
+  color: COLOURS.black,
+  marginRight: 10
+},
+rowView: {
+  flexDirection: 'row',
+  alignItems: 'baseline'
+},
 
 
 
@@ -280,18 +290,22 @@ cardTxtCommandDate: {
   fontSize: 15
 },
 firstHalf: {
-  width: '70%',
+  width: '100%',
 },
 idDate: {
   
-  flexDirection: 'column',
+  flexDirection: 'row',
+  justifyContent:'space-between'
   
 
+},
+adressTextView: {
+  marginVertical: 10
 },
 cardTxtAdress: {
   color: COLOURS.black,
   fontSize: 15,
-  marginVertical: 10
+  
 },
 cardTxtPrice: {
   color: COLOURS.black,
@@ -323,8 +337,7 @@ statusView: {
   backgroundColor: COLOURS.backgroundLight,
   height: 50,
   borderRadius: 10,
-  flexDirection: 'row',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   padding: 10
 },
 statusView3: {

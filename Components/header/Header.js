@@ -100,20 +100,21 @@ export default function Header(props){
       </View>
       : props?.name=="All Products" || props?.name=="All Accessories" || props?.name=="Favorites" || props?.name=="Commands" || props?.name=="Details"
       ?
-      <View style={styles.iconsContainer}>
-        <TouchableOpacity onPress={props.onPress}>
+      <View style={styles.iconsContainer2}>
+        <TouchableOpacity onPress={props.onPress}
+        style={styles.chevronView}>
           <Image style={styles.chevron} source={require('../../Assets/Icons/chevronLeft.png')}/>
         </TouchableOpacity>
-        <Text style={styles.textHeader}>{props?.name}</Text>
+        <Text style={styles.textHeader2}>{props?.name1}</Text>
       </View>
       : props?.name==="Cart"
       ?
-      <View style={styles.iconsContainer}>
+      <View style={styles.iconsContainer2}>
         <TouchableOpacity onPress={props?.onPress}
         style={styles.iconBack2}>
           <Image style={styles.icon} source={require('../../Assets/Icons/chevronLeft.png')}/>
         </TouchableOpacity>
-        <Text style={[styles.textCartHeader,]}>My {props?.name}</Text>
+        <Text style={[styles.textCartHeader,]}>My {props?.name1}</Text>
       </View>  
       :
       (null)

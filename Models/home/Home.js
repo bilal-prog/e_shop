@@ -303,14 +303,39 @@ setAccessory4(accessoryList4);
         {category == 'accessory' ? (
           isAvailable ? (
             <View style={styles.availableView}>
-              <View style={[styles.circle,{backgroundColor: COLOURS.green}]}/>
-              <Text style={{ fontSize: 12,color: COLOURS.green, }}>Available</Text>
+              {
+                lang === "arabe" 
+                ? 
+                <>
+                  <Text style={{ fontSize: 12,color: COLOURS.green, }}>{lang === "arabe" ? HomeStrings.available.arabeText : HomeStrings.available.englishText}</Text>
+                  <View style={[styles.circle,{backgroundColor: COLOURS.green}]}/>
+                </>
+                :
+                <>
+                  <View style={[styles.circle,{backgroundColor: COLOURS.green}]}/>
+                  <Text style={{ fontSize: 12,color: COLOURS.green, }}>{lang === "arabe" ? HomeStrings.available.arabeText : HomeStrings.available.englishText}</Text>
+                </>
+              }
             </View>
           ) : (
-            <View style={styles.availableView}>
-              <View style={[styles.circle,{backgroundColor: COLOURS.red}]}/>
-              <Text style={{fontSize: 12, color: COLOURS.red, }}>Unavailable</Text>
-            </View>
+            
+              lang === "arabe"
+              ? 
+                <>
+                  <View style={styles.availableView}>
+                    <Text style={{fontSize: 12, color: COLOURS.red, }}>{lang === "arabe" ? HomeStrings.unavailable.arabeText : HomeStrings.unavailable.englishText}</Text>
+                    <View style={[styles.circle,{backgroundColor: COLOURS.red}]}/>
+                  </View>
+                </>
+               : 
+                <>
+                  <View style={styles.availableView}>
+                    <View style={[styles.circle,{backgroundColor: COLOURS.red}]}/>
+                    <Text style={{fontSize: 12, color: COLOURS.red, }}>{lang === "arabe" ? HomeStrings.unavailable.arabeText : HomeStrings.unavailable.englishText}</Text>
+                  </View>
+                </>
+              
+            
           )
         ) : null}
         <View style={styles.priceFavoris}>
@@ -318,11 +343,11 @@ setAccessory4(accessoryList4);
           {
             isOff ?
             <>
-              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>&#8377; {productPrice}</Text>
-              <Text style={styles.price} >&#8377; {parseInt(productPrice - (productPrice*offPercentage/100))}</Text>
+              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>{productPrice} DH</Text>
+              <Text style={styles.price} >{parseInt(productPrice - (productPrice*offPercentage/100))} DH</Text>
             </>
             : 
-            <Text style={styles.price}>&#8377; {productPrice}</Text>
+            <Text style={styles.price}>{productPrice} DH</Text>
           }
 
           <TouchableOpacity
@@ -442,6 +467,7 @@ const renderItem = ({item}) => {
                   keyExtractor={item=>item.id}
                   maxToRenderPerBatch={5}
                   showsHorizontalScrollIndicator={false}
+                  
                   />
 
             </View>

@@ -8,11 +8,16 @@ import { COLOURS } from '../../Components/database/Database'
         height: '100%',
         flex:1,
         backgroundColor: COLOURS.white,
+        
+        
+        
+        
+        
+      },
+      container2: {
         paddingHorizontal: 16,
         justifyContent: 'center',
-        
-        
-        
+        marginBottom: '15%'
       },
       
       container3: {

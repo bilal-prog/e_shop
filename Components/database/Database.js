@@ -19,6 +19,7 @@ export const Items = [
     quantityToken:1,
     description:
       'Up to 20 hours battery life | Super powerful Bass | 40mm dynamic driver | Pressure less ear muffs | Bluetooth 5.0 | Voice control',
+    arabeDescription: 'عمر بطارية يصل إلى 20 ساعة | صوت جهير فائق القوة | محرك ديناميكي 40 مم | غطاء للأذن ضغط أقل | بلوتوث 5.0 | التحكم الصوتي.',
     isOff: true,
     offPercentage: 12,
     productImage: require('../database/images/products/Mi1.png'),
@@ -39,6 +40,7 @@ export const Items = [
     quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
+    arabeDescription: 'boAt Rockerz 450 M هي سماعة رأس لاسلكية على الأذن تم تصميمها هندسيًا لتلبية احتياجات عشاق الموسيقى.',
     isOff: true,
     offPercentage: 12,
     productImage: require('../database/images/products/boat1.png'),
@@ -58,6 +60,7 @@ export const Items = [
     quantityToken:1,
     description:
       'Bluetooth: It has Bluetooth v5.0 with a range of 10m and is compatible with Android & iOS',
+    arabeDescription: 'البلوتوث: يحتوي على بلوتوث v5.0 بمدى يصل إلى 10 أمتار ومتوافق مع Android و iOS',
     isOff: true,
     offPercentage: 20,
     productImage: require('../database/images/accessories/boatairpods1.png'),
@@ -77,6 +80,7 @@ export const Items = [
     quantityToken:1,
     description:
       'Fly into your workouts with precise tones that inspire and energize your system with its HD sound, all the time.',
+    arabeDescription: 'انتقل إلى التدريبات الخاصة بك بنغمات دقيقة تلهم نظامك وتنشطه بصوت عالي الدقة ، طوال الوقت.',
     isOff: false,
     productImage: require('../database/images/accessories/boatbassheads1.png'),
     isAvailable: true,
@@ -95,6 +99,7 @@ export const Items = [
     quantityToken:1,
     description:
       'The unbeatable boAt signature sound shines through no matter what are you playing courtesy its 10mm drivers.',
+    arabeDescription: 'يتألق صوت BoAt المميز الذي لا يهزم بغض النظر عن ما تلعبه بفضل محركاتها مقاس 10 مم.',
     isOff: false,
     productImage: require('../database/images/accessories/boatrockerz1.png'),
     isAvailable: false,
@@ -113,6 +118,7 @@ export const Items = [
     quantityToken:1,
     description:
       'One Touch Control & Voice Assistant: With one multifunction button, you can play/pause, previous/next track and answer/hang-up calls.Voice assistant function lets you access siri/Google Assistant',
+    arabeDescription: 'التحكم بلمسة واحدة ومساعد الصوت: مع زر واحد متعدد الوظائف ، يمكنك تشغيل / إيقاف مؤقت ، المسار السابق / التالي والإجابة / إنهاء المكالمات. تتيح لك وظيفة المساعد الصوتي الوصول إلى مساعد siri / Google',
     isOff: true,
     offPercentage: 20,
     productImage: require('../database/images/accessories/boultairbass1.png'),
@@ -132,6 +138,7 @@ export const Items = [
     quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
+    arabeDescription: 'boAt Rockerz 450 M هي سماعة رأس لاسلكية على الأذن تم تصميمها هندسيًا لتلبية احتياجات عشاق الموسيقى.',
     isOff: false,
     productImage: require('../database/images/products/boat1.png'),
     isAvailable: true,
@@ -150,6 +157,7 @@ export const Items = [
     quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
+    arabeDescription: 'boAt Rockerz 450 M هي سماعة رأس لاسلكية على الأذن تم تصميمها هندسيًا لتلبية احتياجات عشاق الموسيقى.',
     isOff: false,
     productImage: require('../database/images/products/boat1.png'),
     isAvailable: true,
@@ -168,6 +176,7 @@ export const Items = [
     quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
+    arabeDescription: 'boAt Rockerz 450 M هي سماعة رأس لاسلكية على الأذن تم تصميمها هندسيًا لتلبية احتياجات عشاق الموسيقى.',
     isOff: false,
     productImage: require('../database/images/products/boat1.png'),
     isAvailable: true,
@@ -186,6 +195,7 @@ export const Items = [
     quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
+    arabeDescription: 'boAt Rockerz 450 M هي سماعة رأس لاسلكية على الأذن تم تصميمها هندسيًا لتلبية احتياجات عشاق الموسيقى.',
     isOff: false,
     productImage: require('../database/images/products/boat1.png'),
     isAvailable: true,
@@ -204,6 +214,7 @@ export const Items = [
     quantityToken:1,
     description:
       'boAt Rockerz 450 M is an on-ear wireless headset that has been ergonomically designed to meet the needs of music lovers.',
+    arabeDescription: 'boAt Rockerz 450 M هي سماعة رأس لاسلكية على الأذن تم تصميمها هندسيًا لتلبية احتياجات عشاق الموسيقى.',
     isOff: false,
     productImage: require('../database/images/products/boat1.png'),
     isAvailable: true,
@@ -222,6 +233,7 @@ export const Items = [
     quantityToken:1,
     description:
       'Bluetooth: It has Bluetooth v5.0 with a range of 10m and is compatible with Android & iOS',
+    arabeDescription: 'البلوتوث: يحتوي على بلوتوث v5.0 بمدى يصل إلى 10 أمتار ومتوافق مع Android و iOS',
     isOff: true,
     offPercentage: 20,
     productImage: require('../database/images/accessories/boatairpods1.png'),
@@ -241,6 +253,7 @@ export const Items = [
     quantityToken:1,
     description:
       'Fly into your workouts with precise tones that inspire and energize your system with its HD sound, all the time.',
+    arabeDescription: 'انتقل إلى التدريبات الخاصة بك بنغمات دقيقة تلهم نظامك وتنشطه بصوت عالي الدقة ، طوال الوقت.',
     isOff: false,
     productImage: require('../database/images/accessories/boatbassheads1.png'),
     isAvailable: true,
@@ -259,6 +272,7 @@ export const Items = [
     quantityToken:1,
     description:
       'The unbeatable boAt signature sound shines through no matter what are you playing courtesy its 10mm drivers.',
+    arabeDescription: 'يتألق صوت BoAt المميز الذي لا يهزم بغض النظر عن ما تلعبه بفضل محركاتها مقاس 10 مم.',
     isOff: false,
     productImage: require('../database/images/accessories/boatrockerz1.png'),
     isAvailable: false,
@@ -277,6 +291,7 @@ export const Items = [
     quantityToken:1,
     description:
       'One Touch Control & Voice Assistant: With one multifunction button, you can play/pause, previous/next track and answer/hang-up calls.Voice assistant function lets you access siri/Google Assistant',
+    arabeDescription: 'التحكم بلمسة واحدة ومساعد الصوت: مع زر واحد متعدد الوظائف ، يمكنك تشغيل / إيقاف مؤقت ، المسار السابق / التالي والإجابة / إنهاء المكالمات. تتيح لك وظيفة المساعد الصوتي الوصول إلى مساعد siri / Google',
     isOff: true,
     offPercentage: 20,
     productImage: require('../database/images/accessories/boultairbass1.png'),
@@ -296,6 +311,7 @@ export const Items = [
     quantityToken:1,
     description:
       'Bluetooth: It has Bluetooth v5.0 with a range of 10m and is compatible with Android & iOS',
+    arabeDescription: 'لبلوتوث: يحتوي على بلوتوث v5.0 بمدى يصل إلى 10 أمتار ومتوافق مع Android و iOS',
     isOff: true,
     offPercentage: 20,
     productImage: require('../database/images/accessories/boatairpods1.png'),
@@ -315,6 +331,7 @@ export const Items = [
     quantityToken:1,
     description:
       'Fly into your workouts with precise tones that inspire and energize your system with its HD sound, all the time.',
+    arabeDescription: 'انتقل إلى التدريبات الخاصة بك بنغمات دقيقة تلهم نظامك وتنشطه بصوت عالي الدقة ، طوال الوقت.',
     isOff: false,
     productImage: require('../database/images/accessories/boatbassheads1.png'),
     isAvailable: true,
@@ -333,6 +350,7 @@ export const Items = [
     quantityToken:1,
     description:
       'The unbeatable boAt signature sound shines through no matter what are you playing courtesy its 10mm drivers.',
+    arabeDescription: 'يتألق صوت BoAt المميز الذي لا يهزم بغض النظر عن ما تلعبه بفضل محركاتها مقاس 10 مم.',
     isOff: false,
     productImage: require('../database/images/accessories/boatrockerz1.png'),
     isAvailable: false,
@@ -351,6 +369,7 @@ export const Items = [
     quantityToken:1,
     description:
       'One Touch Control & Voice Assistant: With one multifunction button, you can play/pause, previous/next track and answer/hang-up calls.Voice assistant function lets you access siri/Google Assistant',
+    arabeDescription: 'التحكم بلمسة واحدة ومساعد الصوت: مع زر واحد متعدد الوظائف ، يمكنك تشغيل / إيقاف مؤقت ، المسار السابق / التالي والإجابة / إنهاء المكالمات. تتيح لك وظيفة المساعد الصوتي الوصول إلى مساعد siri / Google',
     isOff: true,
     offPercentage: 20,
     productImage: require('../database/images/accessories/boultairbass1.png'),

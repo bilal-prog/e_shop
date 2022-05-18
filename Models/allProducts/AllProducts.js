@@ -8,6 +8,7 @@ import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {addProduct,addQuantity,activeFavorite, inactiveFavorite} from '../../action';
+import { AllProductsStrings } from '../../Components/database/Strings';
 
 
 
@@ -23,6 +24,8 @@ export default function AllProducts({navigation,route}){
   const [product, setProduct] = useState({});
 
   const products= useSelector((state) => state.global.products);
+
+  const language= useSelector((state) => state.global.language);
 
   const favorites= useSelector((state) => state.global.favorites);
 
@@ -165,11 +168,11 @@ const checkActive = (id) =>
           {
             isOff ?
             <>
-              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>&#8377; {productPrice}</Text>
-              <Text style={styles.price} >&#8377; {parseInt(productPrice - (productPrice*offPercentage/100))}</Text>
+              <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>{productPrice} DH</Text>
+              <Text style={styles.price} >{parseInt(productPrice - (productPrice*offPercentage/100))} DH</Text>
             </>
             : 
-            <Text style={styles.price}>&#8377; {productPrice}</Text>
+            <Text style={styles.price}>{productPrice} DH</Text>
           }
           
         </View>
@@ -194,7 +197,7 @@ const checkActive = (id) =>
                 Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
               }
              }}>
-              <Text style={styles.btnText}>Add to cart</Text>
+              <Text style={styles.btnText}>{language === "arabe" ? AllProductsStrings.addButton.arabeText : AllProductsStrings.addButton.englishText}</Text>
             </TouchableOpacity>
         <View style={styles.buttons}>
             <TouchableOpacity style={[styles.cartBtn,{opacity: !isAvailable? 0.5 : 1}]}
@@ -311,7 +314,7 @@ const handle = () => {
   return ( 
 
     <SafeAreaView style={styles.container}>
-        <Header name={title} onPress={() => navigation.navigate('Home')}/>
+        <Header name={title} name1={title === "All Products" ? (language === "arabe" ? AllProductsStrings.pageHeaderProducts.arabeText : AllProductsStrings.pageHeaderProducts.englishText ) :  (language === "arabe" ? AllProductsStrings.pageHeaderAccessories.arabeText : AllProductsStrings.pageHeaderAccessories.englishText )} onPress={() => navigation.navigate('Home')}/>
         
         
         

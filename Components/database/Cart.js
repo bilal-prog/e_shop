@@ -9,7 +9,7 @@ import { plusProduct,minProduct, deleteProduct, deleteQuantity, initializeProduc
 import {COLOURS} from '../../Components/database/Database';
 
 import moment from 'moment';
-import { CartStrings } from '../../Components/database/Strings';
+import { CartStrings } from './Strings';
 
 
 
@@ -24,12 +24,14 @@ const [totalPrice, setTotalPrice] = useState(0)
 
 
 const [date, setDate] = useState(new Date());
+const [lang, setLang] = useState()
 const [dateFormat, setDateFormat] =useState(moment(date).format("DD/MM/YYYY HH:mm:ss"));
    
 
-const language= useSelector((state) => state.global?.language);
+
   const products= useSelector((state) => state.global?.products);
   const commands= useSelector((state) => state.global?.commands);
+  const language= useSelector((state) => state.global?.language);
   
   const dispatch = useDispatch();
 
@@ -45,6 +47,11 @@ const language= useSelector((state) => state.global?.language);
      
     idOfCommand();
   }, [commands]);
+
+  useEffect(() => {
+     
+    setLang(language)
+  }, [language]);
 
   
 
@@ -63,7 +70,7 @@ const language= useSelector((state) => state.global?.language);
 
 const ListFooterComponent = () =>(
   <View>
-    <Text style={styles.title}>{language === "arabe" ? CartStrings.deliveryLocation.arabeText : CartStrings.deliveryLocation.englishText}</Text>
+    <Text style={styles.title}>{lang === "arabe" ? CartStrings.deliveryLocation.arabeText : CartStrings.deliveryLocation.englishText}</Text>
 
 <View style={styles.adress}>
       <View style={styles.adress2}>
@@ -80,7 +87,7 @@ const ListFooterComponent = () =>(
         </TouchableOpacity>
 </View>
 
-<Text style={styles.title}>{language === "arabe" ? CartStrings.payement.arabeText : CartStrings.payement.englishText}</Text>
+<Text style={styles.title}>{lang === "arabe" ? CartStrings.payement.arabeText : CartStrings.payement.englishText}</Text>
 
 <View style={styles.adress}>
       <View style={styles.adress2}>
@@ -98,21 +105,21 @@ const ListFooterComponent = () =>(
 </View>
 <View style={{marginBottom: 40}}/>
 
-<Text style={styles.title}>{language === "arabe" ? CartStrings.payement.arabeText : CartStrings.payement.englishText}</Text>
+<Text style={styles.title}>{lang === "arabe" ? CartStrings.payement.arabeText : CartStrings.payement.englishText}</Text>
 
-<View style={[styles.totalView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
-  <Text style={styles.total}>{language === "arabe" ? CartStrings.subTotal.arabeText : CartStrings.subTotal.englishText}</Text>
-  <Text style={styles.total}>{totalPrice} DH</Text>
+<View style={styles.totalView}>
+  <Text style={styles.total}>{lang === "arabe" ? CartStrings.subTotal.arabeText : CartStrings.subTotal.englishText}</Text>
+  <Text style={styles.total}>${totalPrice}</Text>
 </View>
 
-<View style={[styles.totalView,{marginBottom: 45,flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
-  <Text style={styles.total}>{language === "arabe" ? CartStrings.shippingCost.arabeText : CartStrings.shippingCost.englishText}</Text>
+<View style={[styles.totalView,{marginBottom: 45}]}>
+  <Text style={styles.total}>{lang === "arabe" ? CartStrings.shippingCost.arabeText : CartStrings.shippingCost.englishText}</Text>
   <Text style={styles.total}>+100</Text>
 </View>
 
-<View style={[styles.totalView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
-  <Text style={styles.total}>{language === "arabe" ? CartStrings.total.arabeText : CartStrings.total.englishText}</Text>
-  <Text style={[styles.total,{color: COLOURS.black, fontWeight: '700', fontSize: 25}]}>{totalPrice + 100} DH</Text>
+<View style={[styles.totalView,]}>
+  <Text style={styles.total}>{lang === "arabe" ? CartStrings.total.arabeText : CartStrings.total.englishText}</Text>
+  <Text style={[styles.total,{color: COLOURS.black, fontWeight: '700', fontSize: 25}]}>${totalPrice + 100}</Text>
 </View>
 
 <TouchableOpacity style={styles.buttonCheckOut}
@@ -166,7 +173,7 @@ const ListFooterComponent = () =>(
       }
     }
     >
-      <Text style={styles.BtnText}>{language === "arabe" ? CartStrings.checkButton.arabeText : CartStrings.checkButton.englishText}({totalPrice + 100}DH)</Text>
+      <Text style={styles.BtnText}>{lang === "arabe" ? CartStrings.checkButton.arabeText : CartStrings.checkButton.englishText}(${totalPrice + 100})</Text>
 </TouchableOpacity>
 
   </View>
@@ -344,7 +351,7 @@ const totalPriceFunction = () =>{
 
 const ListEmptyComponent = () =>(
   <View style={styles.empty}>
-    <Text style={styles.emptyTxt}>{language === "arabe" ? CartStrings.text.arabeText : CartStrings.text.englishText}</Text>
+    <Text style={styles.emptyTxt}>gggggg{language === "arabe" ? CartStrings.text.arabeText : CartStrings.text.englishText}</Text>
 
     <TouchableOpacity style={styles.buttonCheckOut}
     onPress={()=>{
@@ -368,8 +375,12 @@ const ListEmptyComponent = () =>(
 
     <SafeAreaView style={styles.container}>
       
-      <Header name1={language === "arabe" ? CartStrings.pageHeader.arabeText : CartStrings.pageHeader.englishText} name='Cart' onPress={() => navigation.navigate('Home')}/>
+      <Header name1={lang === "arabe" ? CartStrings.pageHeader.arabeText : CartStrings.pageHeader.englishText} name='Cart' onPress={() => navigation.goBack()}/>
         <View style={styles.cnt}>
+          {products.length === 0
+          ?
+          <ListEmptyComponent/>
+          :(null)}
 
         
           
@@ -380,13 +391,12 @@ const ListEmptyComponent = () =>(
                       keyExtractor={item=>item.id}
                       maxToRenderPerBatch={5}
                       showsVerticalScrollIndicator={false}
-                      ListEmptyComponent={ListEmptyComponent}
                       
-                      ListFooterComponent={ListFooterComponent}
-                      ListFooterComponentStyle={{marginVertical: 40}}
+                      
+                      
             />
           
-
+            <ListFooterComponent/>
           
 
           </View>

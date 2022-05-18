@@ -12,6 +12,20 @@ const styles = StyleSheet.create({
         backgroundColor: COLOURS.white,
         position: 'relative',
     },
+    cardContainer2: {
+        
+        position: 'absolute',
+        width: 70,
+        height: 40,
+        backgroundColor: COLOURS.green,
+        top: 0,
+        left: 0,
+        borderTopLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+          
+      },
     renderView: {
         
         height: '100%',
@@ -163,12 +177,13 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: COLOURS.blue,
-        padding: 10,
-        borderRadius: 20
+        padding: 16,
+        paddingHorizontal: 30,
+        borderRadius: 10
     },
     BtnText: {
         color: COLOURS.white,
-        fontSize: 20,
+        fontSize: 16,
         textAlign: 'center'
     },
     chevronBtn: {
@@ -177,6 +192,26 @@ const styles = StyleSheet.create({
     imagesView: {
         position: 'absolute',
         
+    },
+    buttonsView: {
+        marginTop: 40,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignContent: 'center',
+    },
+    solde: {
+        
+        fontSize: 12,
+        color: COLOURS.white,
+        fontWeight: 'bold',
+        letterSpacing: 1,
+          
+      },
+    priceView: {
+        width: '70%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
     
 });
