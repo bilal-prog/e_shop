@@ -1,4 +1,4 @@
-import { SafeAreaView,TextInput,FlatList, Text,Alert, ScrollView,I18nManager, View,Image,TouchableOpacity } from 'react-native';
+import { SafeAreaView,TextInput,FlatList, Text,Alert,ActivityIndicator, ScrollView,I18nManager, View,Image,TouchableOpacity } from 'react-native';
 import React, {useState, useEffect} from 'react';
 
 import styles from './CartStyle';
@@ -9,7 +9,7 @@ import { plusProduct,minProduct, deleteProduct, deleteQuantity, initializeProduc
 import {COLOURS} from '../../Components/database/Database';
 
 import moment from 'moment';
-import { CartStrings } from '../../Components/database/Strings';
+import { CartStrings,AllProductsStrings } from '../../Components/database/Strings';
 
 
 
@@ -120,8 +120,11 @@ const ListFooterComponent = () =>(
     onPress={
       ()=>{
 
-        Alert.alert("Creating a command","Do you want to create a command?",[{text:"NO"}, {text:"YES", onPress: ()=>
+        Alert.alert(language === "arabe" ? CartStrings.create.arabeText : CartStrings.create.englishText,language === "arabe" ? CartStrings.createTxt.arabeText : CartStrings.createTxt.englishText,[{text:language === "arabe" ? CartStrings.no.arabeText : CartStrings.no.englishText}, {text:language === "arabe" ? CartStrings.yes.arabeText : CartStrings.yes.englishText, onPress: ()=>
         {
+          {<View style={{}}>
+            <ActivityIndicator  size={'large'} color={"blue"}/>
+          </View>}
           if (products.length > 0) {
             if(commands.length === 0){
               dispatch(addCommand({products: products, 
@@ -150,9 +153,9 @@ const ListFooterComponent = () =>(
 
             dispatch(initializeProducts())
             totalPriceFunction();
-            Alert.alert("Command was added","Please check your command in the Commands page",[{text:"CHECK", onPress: ()=>{navigation.navigate("Commands")}}, {text:"NO NEED"}])
+            Alert.alert(language === "arabe" ? CartStrings.added.arabeText : CartStrings.added.englishText,language === "arabe" ? CartStrings.addedTxt.arabeText : CartStrings.addedTxt.englishText,[{text:language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText, onPress: ()=>{navigation.navigate("Commands")}}, {text:language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}])
           }else{
-            Alert.alert("Your Cart is 'Empty' !!!","Please add some products to check them out",[{text:"OK"}])
+            Alert.alert(language === "arabe" ? CartStrings.yourCart.arabeText : CartStrings.yourCart.englishText,language === "arabe" ? CartStrings.yourCartTxt.arabeText : CartStrings.yourCartTxt.englishText,[{text:language === "arabe" ? CartStrings.ok.arabeText : CartStrings.ok.englishText}])
           }
         }}])
 
@@ -277,8 +280,8 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
             <TouchableOpacity style={styles.deleteBtn}
               onPress={
                 ()=>{
-                  Alert.alert("Product removing","Are you sure you want to remove this product?",[{text: "Cancel",
-                onPress: ()=> console.log("cancel")},{text: "Yes", onPress: ()=>{
+                  Alert.alert(language === "arabe" ? CartStrings.remove.arabeText : CartStrings.remove.englishText,language === "arabe" ? CartStrings.removeTxt.arabeText : CartStrings.removeTxt.englishText,[{text: language === "arabe" ? CartStrings.cancel.arabeText : CartStrings.cancel.englishText,
+                onPress: ()=> console.log("cancel")},{text: language === "arabe" ? CartStrings.yes.arabeText : CartStrings.yes.englishText, onPress: ()=>{
                   const el = (element) => element.id == id
                   
                 dispatch(deleteProduct(products.findIndex(el)))

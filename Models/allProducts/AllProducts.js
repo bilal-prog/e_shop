@@ -192,9 +192,9 @@ const checkActive = (id) =>
                 isOff ? dispatch(addProduct({...prod,productPrice: parseInt(productPrice - (productPrice*offPercentage/100))}))
                 : dispatch(addProduct(prod))
                 
-                Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])
+                Alert.alert(language === "arabe" ? AllProductsStrings.added.arabeText : AllProductsStrings.added.englishText, language === "arabe" ? AllProductsStrings.addedTxt.arabeText : AllProductsStrings.addedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
+                Alert.alert(language === "arabe" ? AllProductsStrings.notadded.arabeText : AllProductsStrings.notadded.englishText, language === "arabe" ? AllProductsStrings.notaddedTxt.arabeText : AllProductsStrings.notaddedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}]) 
               }
              }}>
               <Text style={styles.btnText}>{language === "arabe" ? AllProductsStrings.addButton.arabeText : AllProductsStrings.addButton.englishText}</Text>
@@ -213,9 +213,9 @@ const checkActive = (id) =>
                 isOff ? dispatch(addProduct({...prod,productPrice: parseInt(productPrice - (productPrice*offPercentage/100))}))
                 : dispatch(addProduct(prod))
                 
-                Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")}])
+                Alert.alert(language === "arabe" ? AllProductsStrings.added.arabeText : AllProductsStrings.added.englishText, language === "arabe" ? AllProductsStrings.addedTxt.arabeText : AllProductsStrings.addedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
+                Alert.alert(language === "arabe" ? AllProductsStrings.notadded.arabeText : AllProductsStrings.notadded.englishText, language === "arabe" ? AllProductsStrings.notaddedTxt.arabeText : AllProductsStrings.notaddedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}]) 
               }
               
             }}>

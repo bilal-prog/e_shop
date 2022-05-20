@@ -2,7 +2,7 @@ import { SafeAreaView,TextInput,Alert,StatusBar,FlatList, Dimensions,I18nManager
 import React, {useState, useEffect} from 'react';
 import styles from './ProductDetailsStyle';
 import { Items , COLOURS} from '../../Components/database/Database';
-import { ProductDetailsStrings } from '../../Components/database/Strings'
+import { ProductDetailsStrings, AllProductsStrings } from '../../Components/database/Strings'
 import { useSelector, useDispatch } from 'react-redux';
 import {addProduct, plusProduct} from '../../action';
 
@@ -226,10 +226,10 @@ const dispatch = useDispatch();
                   
                   //dispatch(addQuantity({productID: productID, quantityOrigin: product.quantity - 1, quantityToken: 1}))
                   
-                  Alert.alert("Product was added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])  
-                }else{
-                  Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
-                }
+                  Alert.alert(language === "arabe" ? AllProductsStrings.added.arabeText : AllProductsStrings.added.englishText, language === "arabe" ? AllProductsStrings.addedTxt.arabeText : AllProductsStrings.addedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}])
+              }else{
+                Alert.alert(language === "arabe" ? AllProductsStrings.notadded.arabeText : AllProductsStrings.notadded.englishText, language === "arabe" ? AllProductsStrings.notaddedTxt.arabeText : AllProductsStrings.notaddedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}]) 
+              }
                 
                 }}>
                   <Text style={[styles.BtnText,{fontSize: lang === "arabe" ? 18 : 16}]}>{lang === "english" ? ProductDetailsStrings.addButton.englishText :  ProductDetailsStrings.addButton.arabeText}</Text>

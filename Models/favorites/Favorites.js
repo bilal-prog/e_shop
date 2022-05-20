@@ -8,7 +8,7 @@ import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {addProduct,addQuantity} from '../../action';
-import { FavoritesStrings, HomeStrings } from '../../Components/database/Strings';
+import { AllProductsStrings, FavoritesStrings, HomeStrings } from '../../Components/database/Strings';
 
 
 
@@ -141,9 +141,9 @@ export default function AllProducts({navigation,route}){
 
                 dispatch(addProduct(prod))
                 
-                Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])
+                Alert.alert(language === "arabe" ? AllProductsStrings.added.arabeText : AllProductsStrings.added.englishText, language === "arabe" ? AllProductsStrings.addedTxt.arabeText : AllProductsStrings.addedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
+                Alert.alert(language === "arabe" ? AllProductsStrings.notadded.arabeText : AllProductsStrings.notadded.englishText, language === "arabe" ? AllProductsStrings.notaddedTxt.arabeText : AllProductsStrings.notaddedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}]) 
               }
              }}>
               <Text style={styles.btnText}>{language === "arabe" ? FavoritesStrings.addButton.arabeText : FavoritesStrings.addButton.englishText}</Text>
@@ -159,9 +159,9 @@ export default function AllProducts({navigation,route}){
 
                 dispatch(addProduct(prod))
                 
-                Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])
+                Alert.alert(language === "arabe" ? AllProductsStrings.added.arabeText : AllProductsStrings.added.englishText, language === "arabe" ? AllProductsStrings.addedTxt.arabeText : AllProductsStrings.addedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}])
               }else{
-                Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
+                Alert.alert(language === "arabe" ? AllProductsStrings.notadded.arabeText : AllProductsStrings.notadded.englishText, language === "arabe" ? AllProductsStrings.notaddedTxt.arabeText : AllProductsStrings.notaddedTxt.englishText,[{text: language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText,onPress: ()=>navigation.navigate("Cart")},{text: language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}]) 
               }
             }}>
               <Image source={require('../../Assets/Icons/cart.png')} style={styles.icon}/>

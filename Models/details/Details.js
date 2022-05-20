@@ -7,7 +7,7 @@ import Header from '../../Components/header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { plusProduct,minProduct, deleteProduct, deleteQuantity, initializeProducts,addCommand, plusProductCommand, minProductCommand, addCopyToCommand, deleteProductfromCommand} from '../../action';
 import {COLOURS} from '../../Components/database/Database';
-import { CartStrings, CommandsStrings } from '../../Components/database/Strings';
+import { AllProductsStrings, CartStrings, CommandsStrings, DetailsStrings } from '../../Components/database/Strings';
 
 import moment from 'moment';
 
@@ -129,10 +129,10 @@ const ListFooterComponent = () =>(
                   const commandCopyPrime = {...commandCopy};
                   commandCopyPrime.details.price = totalPrice + 100
                   dispatch(addCopyToCommand({...commandCopy}))
-
-                  Alert.alert("Command Was Modified","Please check your commands"+status,[{text:"CHECK", onPress: ()=>{navigation.navigate("Commands")}}, {text:"NO NEED"}])
+////!!!!!!!!!!!!!!!!!!!!!!!status
+                  Alert.alert(language === "arabe" ? DetailsStrings.modified.arabeText : DetailsStrings.modified.englishText,language === "arabe" ? DetailsStrings.modifiedTxt.arabeText : DetailsStrings.modifiedTxt.englishText,[{text:language === "arabe" ? AllProductsStrings.check.arabeText : AllProductsStrings.check.englishText, onPress: ()=>{navigation.navigate("Commands")}}, {text:language === "arabe" ? AllProductsStrings.noNeed.arabeText : AllProductsStrings.noNeed.englishText}])
                 }else{
-                  Alert.alert("Command Wasn't Modified !","Sorry you can't modify this command, it's already "+status,[{text:"OK"}])
+                  Alert.alert(language === "arabe" ? DetailsStrings.notmodified.arabeText : DetailsStrings.notmodified.englishText,language === "arabe" ? DetailsStrings.notmodifiedTxt.arabeText : DetailsStrings.notmodifiedTxt.englishText+status,[{text:language === "arabe" ? CartStrings.ok.arabeText : CartStrings.ok.englishText}])
                 }
               
 
@@ -254,8 +254,8 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
             <TouchableOpacity style={styles.deleteBtn}
               onPress={
                 ()=>{
-                  Alert.alert("Product removing","Are you sure you want to remove this product?",[{text: "Cancel",
-                onPress: ()=> console.log("cancel")},{text: "Yes", onPress: ()=>{
+                  Alert.alert(language === "arabe" ? CartStrings.remove.arabeText : CartStrings.remove.englishText,language === "arabe" ? CartStrings.removeTxt.arabeText : CartStrings.removeTxt.englishText,[{text: language === "arabe" ? CartStrings.cancel.arabeText : CartStrings.cancel.englishText,
+                onPress: ()=> console.log("cancel")},{text: language === "arabe" ? CartStrings.yes.arabeText : CartStrings.yes.englishText, onPress: ()=>{
                   const el = (element) => element.id == id
                   console.log(products.findIndex(el));
                 dispatch(deleteProductfromCommand(products.findIndex(el)))

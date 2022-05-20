@@ -54,22 +54,35 @@ export const AllProductsStrings = {
         arabeText: "جميع المستلزمات",
         englishText: "All Accessories"
     },
+
+    ////
     added:{
-        arabeText: "جميع المستلزمات",
+        arabeText: "تمت إضافة المنتج",
         englishText: "Product added"
     },
     addedTxt:{
-        arabeText: "جميع المستلزمات",
+        arabeText: "يرجى التحقق من عربة التسوق الخاصة بك",
         englishText: "Please check your Cart"
     },
     notadded:{
-        arabeText: "جميع المستلزمات",
+        arabeText: "لم يتم إضافة المنتج",
         englishText: "Product was not added"
     },
     notaddedTxt:{
-        arabeText: "جميع المستلزمات",
+        arabeText: "هذا المنتج موجود بالفعل في عربة التسوق الخاصة بك ، يرجى التحقق منه",
         englishText: "This product is already in your Cart please check it"
     },
+
+    ////
+    check:{
+        arabeText: "تحقق",
+        englishText: "CHECK"
+    },
+    noNeed:{
+        arabeText: "لا داعي",
+        englishText: "NO NEED"
+    },
+
 };
 
 export const FavoritesStrings = {
@@ -90,7 +103,7 @@ export const CommandsStrings = {
         englishText: "Date"
     },
     pageHeader:{
-        arabeText: "طلبات",
+        arabeText: "الطلبات",
         englishText: "Commands"
     },
     new:{
@@ -117,6 +130,8 @@ export const CommandsStrings = {
         arabeText: "منتجاتك",
         englishText: "Your Products"
     },
+
+    /////
     seconds:{
         arabeText: "منتجاتك",
         englishText: "s"
@@ -133,7 +148,7 @@ export const CommandsStrings = {
         arabeText: "منتجاتك",
         englishText: "d"
     },
-
+/////
     text:{
         arabeText: "هذه صفحة الطلبات الخاصة بك ، إنها فارغة لذا يرجى الانتقال لإضافة بعض المنتجات للطلب من هنا",
         englishText: "This is your Commands Page, it's empty so  please go to add some products to command from here"
@@ -188,39 +203,59 @@ export const CartStrings = {
     },
 
 
-
+///////
     
     create:{
-        arabeText: "المجموع",
+        arabeText: "إنشاء طلب",
         englishText: "Creating a command"
     },
     createTxt:{
-        arabeText: "المجموع",
+        arabeText: "هل تريد إنشاء طلب؟",
         englishText: "Do you want to create a command?"
     },
     added:{
-        arabeText: "المجموع",
+        arabeText: "تمت إضافة طلب",
         englishText: "Command was added"
     },
     addedTxt:{
-        arabeText: "المجموع",
+        arabeText: "يرجى التحقق من الأمر الخاص بك في صفحة الطلبات",
         englishText: "Please check your command in the Commands page"
     },
     yourCart:{
-        arabeText: "المجموع",
+        arabeText: "عربة التسوق فارغة' !!!",
         englishText: "Your Cart is 'Empty' !!!"
     },
     yourCartTxt:{
-        arabeText: "المجموع",
+        arabeText: "الرجاء إضافة بعض المنتجات للتحقق منها",
         englishText: "Please add some products to check them out"
     },
     remove:{
-        arabeText: "المجموع",
+        arabeText: "إزالة المنتج",
         englishText: "Product removing"
     },
     removeTxt:{
-        arabeText: "المجموع",
+        arabeText: "هل أنت متأكد أنك تريد إزالة هذا المنتج؟",
         englishText: "Are you sure you want to remove this product?"
+    },
+
+
+    ////
+
+    yes:{
+        arabeText: "أجل",
+        englishText: "YES"
+    },
+    no:{
+        arabeText: "لا",
+        englishText: "NO"
+    },
+    ok:{
+        arabeText: "حسنا",
+        englishText: "OK"
+    },
+    cancel:{
+        arabeText: "إلغاء",
+        englishText: "Cancel"
     },
 
     
@@ -229,20 +264,22 @@ export const CartStrings = {
 
 
 export const DetailsStrings = {
+
+    //////
     modified:{
-        arabeText: "المجموع",
+        arabeText: "تم تعديل الطلب",
         englishText: "Command Was Modified"
     },
     modifiedTxt:{
-        arabeText: "المجموع",
+        arabeText: "يرجى التحقق من طلباتك",
         englishText: "Please check your commands"
     },
     notmodified:{
-        arabeText: "المجموع",
+        arabeText: "لم يتم تعديل الطلب!",
         englishText: "Command Wasn't Modified !"
     },
     notmodifiedTxt:{
-        arabeText: "المجموع",
+        arabeText: "معذرةً ، لا يمكنك تعديل هذا الأمر ، فهو ",
         englishText: "Sorry you can't modify this command, it's already "
     },
     new:{
@@ -257,12 +294,5 @@ export const DetailsStrings = {
         arabeText: "مهيأ",
         englishText: "Ready"
     },
-    remove:{
-        arabeText: "المجموع",
-        englishText: "Product removing"
-    },
-    removeTxt:{
-        arabeText: "المجموع",
-        englishText: "Are you sure you want to remove this product?"
-    },
+    
 }

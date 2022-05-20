@@ -155,7 +155,7 @@ export default function Commands({navigation}){
                     :
                     (null)
                 }
-                    <Text style={styles.statusTxt1}>{language === "arabe" ? CommandsStrings.new.arabeText : CommandsStrings.new.englishText}</Text>
+                    <Text style={[styles.statusTxt1,{textDecorationLine: checkStatus(checkDate(date,commandId)) === 'New' ? 'underline' : 'none'}]}>{language === "arabe" ? CommandsStrings.new.arabeText : CommandsStrings.new.englishText}</Text>
                 </View>
 
                 <View style={styles.statusView2}>
@@ -169,7 +169,7 @@ export default function Commands({navigation}){
                     :
                     (null)
                 }
-                    <Text style={styles.statusTxt1}>{language === "arabe" ? CommandsStrings.onDelivery.arabeText : CommandsStrings.onDelivery.englishText}</Text>
+                    <Text style={[styles.statusTxt1,{textDecorationLine: checkStatus(checkDate(date,commandId)) === 'OnDelivery' ? 'underline' : 'none'}]}>{language === "arabe" ? CommandsStrings.onDelivery.arabeText : CommandsStrings.onDelivery.englishText}</Text>
                 </View>
 
                 <View style={styles.statusView2}>
@@ -183,7 +183,7 @@ export default function Commands({navigation}){
                     :
                     (null)
                 }
-                    <Text style={styles.statusTxt1}>{language === "arabe" ? CommandsStrings.ready.arabeText : CommandsStrings.ready.englishText}</Text>
+                    <Text style={[styles.statusTxt1,{textDecorationLine: checkStatus(checkDate(date,commandId)) === 'Ready' ? 'underline' : 'none'}]}>{language === "arabe" ? CommandsStrings.ready.arabeText : CommandsStrings.ready.englishText}</Text>
                 </View>
             </View>
             
