@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaView,TextInput, Text, ScrollView, View,Image,TouchableOpacity } from 'react-native';
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./Models/home/Home";
@@ -25,6 +25,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { addProduct } from "./action";
 import Details from "./Models/details/Details";
+import SplashScreen from 'react-native-splash-screen'
 
 
 
@@ -157,6 +158,17 @@ export default function App(){
   // let persistor = persistStore(store);
 // <Provider store={store}>
 // </Provider>
+
+
+useEffect(()=>{
+  SplashScreen.hide()
+},[])
+
+
+
+
+
+
   return (
     
       

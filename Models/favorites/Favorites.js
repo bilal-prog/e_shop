@@ -8,7 +8,7 @@ import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {addProduct,addQuantity} from '../../action';
-import { FavoritesStrings } from '../../Components/database/Strings';
+import { FavoritesStrings, HomeStrings } from '../../Components/database/Strings';
 
 
 
@@ -35,6 +35,7 @@ export default function AllProducts({navigation,route}){
 
     const favorites = useSelector((state)=> state.global.favorites);
     const products= useSelector((state) => state.global.products);
+    
     
 
   // const getDataFromDB = async => {  
@@ -110,12 +111,12 @@ export default function AllProducts({navigation,route}){
             isAvailable ? (
               <View style={styles.availableView}>
                 <View style={[styles.circle,{backgroundColor: COLOURS.green}]}/>
-                <Text style={{ fontSize: 12,color: COLOURS.green, }}>Available</Text>
+                <Text style={{ fontSize: 12,color: COLOURS.green, }}>{language === "arabe" ? HomeStrings.available.arabeText : HomeStrings.available.englishText}</Text>
               </View>
             ) : (
               <View style={styles.availableView}>
                 <View style={[styles.circle,{backgroundColor: COLOURS.red}]}/>
-                <Text style={{fontSize: 12, color: COLOURS.red, }}>Unavailable</Text>
+                <Text style={{fontSize: 12, color: COLOURS.red, }}>{language === "arabe" ? HomeStrings.unavailable.arabeText : HomeStrings.unavailable.englishText}</Text>
               </View>
             )
           ) : null}
@@ -132,14 +133,14 @@ export default function AllProducts({navigation,route}){
             <TouchableOpacity style={[styles.button,{opacity: isAvailable ? 1 : 0.5}]}
             disabled={!isAvailable}
             onPress={()=>{ 
-              const el = (element) => element.productID === id
+              const el = (element) => element.id === id
 
               let check = products.findIndex(el)
 
               if (check === -1) {
 
                 dispatch(addProduct(prod))
-                dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
+                
                 Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])
               }else{
                 Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 
@@ -150,14 +151,14 @@ export default function AllProducts({navigation,route}){
             <TouchableOpacity style={[styles.cartBtn,{opacity: isAvailable ? 1 : 0.5}]}
             disabled={!isAvailable}
             onPress={()=>{
-              const el = (element) => element.productID === id
+              const el = (element) => element.id === id
 
               let check = products.findIndex(el)
 
               if (check === -1) {
 
                 dispatch(addProduct(prod))
-                dispatch(addQuantity({productID: id, quantityOrigin: quantity - 1, quantityToken: 1}))
+                
                 Alert.alert("Product added", "Please check your Cart",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}])
               }else{
                 Alert.alert("Product was not added", "This product is already in your Cart please check it",[{text: "CHECK",onPress: ()=>navigation.navigate("Cart")},{text: "NO NEED"}]) 

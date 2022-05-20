@@ -1,7 +1,8 @@
-import { SafeAreaView,TextInput, Text, ScrollView, View,Image,TouchableOpacity } from 'react-native';
+import { SafeAreaView,TextInput, Text,Alert, ScrollView, View,Image,TouchableOpacity,I18nManager } from 'react-native';
 import React, {useState,useEffect} from 'react';
 import { setLang } from '../../action';
 import styles from './HeaderStyle';
+import RNRestart from 'react-native-restart'
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -20,7 +21,9 @@ export default function Header(props){
 
 
     useEffect(() => {
+      
      dispatch(setLang(language))
+     
       
     }, [language]);
 
@@ -28,6 +31,11 @@ export default function Header(props){
 
     
   
+
+
+
+
+    
 
     
 
@@ -65,22 +73,42 @@ export default function Header(props){
           <TouchableOpacity 
           onPress={
             ()=>{
-              console.log(language);
+
+                
+
+                console.log(language);
               if(language === "arabe"){
                 console.log("if1");
+                
                 dispatch(setLang("english"))
-                setLangg("english")
+                  I18nManager.forceRTL(false);
+
+                
+                
+                  
               }else if(language == "english"){
                 console.log("if2");
                 dispatch(setLang("arabe"))
-                setLangg("arabe")
+                  I18nManager.forceRTL(true)
+                  
+                
+                  
               }
               console.log(language);
+
+              setTimeout(()=>{RNRestart.Restart()},2000)
+
+
+              
+
+
+
+              
             }
             
             
           }>
-            <View style={[styles.radioView,{alignItems: langg === "arabe" ? 'flex-end': 'flex-start'}]}>
+            <View style={[styles.radioView,{alignItems: I18nManager.isRTL ? 'flex-end': 'flex-start'}]}>
               <View style={styles.radioContent}/>
             </View>
           </TouchableOpacity>
@@ -102,7 +130,7 @@ export default function Header(props){
       ?
       <View style={styles.iconsContainer2}>
         <TouchableOpacity onPress={props.onPress}
-        style={styles.chevronView}>
+        style={[styles.chevronView,{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]}>
           <Image style={styles.chevron} source={require('../../Assets/Icons/chevronLeft.png')}/>
         </TouchableOpacity>
         <Text style={styles.textHeader2}>{props?.name1}</Text>
@@ -112,9 +140,9 @@ export default function Header(props){
       <View style={styles.iconsContainer2}>
         <TouchableOpacity onPress={props?.onPress}
         style={styles.iconBack2}>
-          <Image style={styles.icon} source={require('../../Assets/Icons/chevronLeft.png')}/>
+          <Image style={[styles.icon,{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]} source={require('../../Assets/Icons/chevronLeft.png')}/>
         </TouchableOpacity>
-        <Text style={[styles.textCartHeader,]}>My {props?.name1}</Text>
+        <Text style={[styles.textCartHeader,]}>{props?.name1}</Text>
       </View>  
       :
       (null)

@@ -1,4 +1,4 @@
-import { SafeAreaView,TextInput,FlatList, Text,Alert, ScrollView, View,Image,TouchableOpacity } from 'react-native';
+import { SafeAreaView,TextInput,FlatList, Text,Alert, ScrollView,I18nManager, View,Image,TouchableOpacity } from 'react-native';
 import React, {useState, useEffect} from 'react';
 
 import styles from './CartStyle';
@@ -69,14 +69,14 @@ const ListFooterComponent = () =>(
       <View style={styles.adress2}>
 
       <TouchableOpacity style={styles.camion}>
-        <Image style={styles.camionIcon} source={require('../../Assets/Icons/camion.png')}/>
+        <Image style={[styles.camionIcon,{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]} source={require('../../Assets/Icons/camion.png')}/>
       </TouchableOpacity>
       <View>
         <Text numberOfLines={2} style={styles.adressTxt}>ave 20 agdal rabat ave 20 agdal rabatcave 20 agdal rabat ave 20 agdal rabat</Text>
       </View>
       </View>
         <TouchableOpacity>
-          <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
+          <Image style={[styles.chevron1,{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]} source={require('../../Assets/Icons/chevronR.png')}/>
         </TouchableOpacity>
 </View>
 
@@ -86,31 +86,31 @@ const ListFooterComponent = () =>(
       <View style={styles.adress2}>
 
       <TouchableOpacity style={styles.visa}>
-        <Image style={styles.visaIcon} source={require('../../Assets/Icons/visa.png')}/>
+        <Image style={[styles.visaIcon]} source={require('../../Assets/Icons/visa.png')}/>
       </TouchableOpacity>
       <View>
         <Text numberOfLines={3} style={styles.adressTxt}>VISA CLASSIC {'\n'}*****0921</Text>
       </View>
       </View>
         <TouchableOpacity>
-          <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
+          <Image style={[styles.chevron1,{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]} source={require('../../Assets/Icons/chevronR.png')}/>
         </TouchableOpacity>
 </View>
 <View style={{marginBottom: 40}}/>
 
 <Text style={styles.title}>{language === "arabe" ? CartStrings.payement.arabeText : CartStrings.payement.englishText}</Text>
 
-<View style={[styles.totalView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+<View style={styles.totalView}>
   <Text style={styles.total}>{language === "arabe" ? CartStrings.subTotal.arabeText : CartStrings.subTotal.englishText}</Text>
   <Text style={styles.total}>{totalPrice} DH</Text>
 </View>
 
-<View style={[styles.totalView,{marginBottom: 45,flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+<View style={[styles.totalView,{marginBottom: 45}]}>
   <Text style={styles.total}>{language === "arabe" ? CartStrings.shippingCost.arabeText : CartStrings.shippingCost.englishText}</Text>
-  <Text style={styles.total}>+100</Text>
+  <Text style={styles.total}>+100 DH</Text>
 </View>
 
-<View style={[styles.totalView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+<View style={styles.totalView}>
   <Text style={styles.total}>{language === "arabe" ? CartStrings.total.arabeText : CartStrings.total.englishText}</Text>
   <Text style={[styles.total,{color: COLOURS.black, fontWeight: '700', fontSize: 25}]}>{totalPrice + 100} DH</Text>
 </View>
@@ -230,7 +230,7 @@ const Item = ({id,item,isOff,offPercentage,category, productImage,isAvailable,pr
           {productName}
         </Text>
         
-        <Text style={styles.price}>&#8377; {productPrice}</Text>
+        <Text style={styles.price}>{productPrice} DH</Text>
         
         <View style={styles.cart}>
             

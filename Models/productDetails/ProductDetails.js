@@ -1,4 +1,4 @@
-import { SafeAreaView,TextInput,Alert,StatusBar,FlatList, Dimensions, Animated, Text, ScrollView, View,Image,TouchableOpacity } from 'react-native';
+import { SafeAreaView,TextInput,Alert,StatusBar,FlatList, Dimensions,I18nManager, Animated, Text, ScrollView, View,Image,TouchableOpacity } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './ProductDetailsStyle';
 import { Items , COLOURS} from '../../Components/database/Database';
@@ -160,7 +160,7 @@ const dispatch = useDispatch();
             <ScrollView>
             <View style={styles.container4}>
               <View style={styles.blueContainer}>
-                <Image style={styles.chevron1} source={require('../../Assets/Icons/blueCart.png')}/>
+                <Image style={[styles.chevron1,{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]} source={require('../../Assets/Icons/blueCart.png')}/>
                 <Text style={styles.blueTxt}>Shopping</Text>
               </View>
               <View style={styles.productNameLink}>
@@ -177,14 +177,14 @@ const dispatch = useDispatch();
                 <View style={styles.adress2}>
 
                 <TouchableOpacity style={styles.camion}>
-                  <Image style={styles.camionIcon} source={require('../../Assets/Icons/camion.png')}/>
+                  <Image style={[styles.camionIcon,{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]} source={require('../../Assets/Icons/camion.png')}/>
                 </TouchableOpacity>
                 <View>
                   <Text numberOfLines={2} style={styles.adressTxt}>ave 20 agdal rabat ave 20 agdal rabat  ave 20 agdal rabatave 20 agdal rabat</Text>
                 </View>
                 </View>
                   <TouchableOpacity style={styles.chevronBtn}>
-                    <Image style={styles.chevron1} source={require('../../Assets/Icons/chevronR.png')}/>
+                    <Image style={[styles.chevron1,{transform: [{scaleX: I18nManager.isRTL ? -1 : 1}]}]} source={require('../../Assets/Icons/chevronR.png')}/>
                   </TouchableOpacity>
               </View>
 
@@ -197,7 +197,10 @@ const dispatch = useDispatch();
                   <Text style={[styles.price,{textDecorationLine: 'line-through'}]}>{product.productPrice} DH</Text>
                   <Text style={styles.price} >{parseInt(product.productPrice - (product.productPrice*product.offPercentage/100))} DH</Text>
                 </View>
-                : <Text style={styles.price}>$ {product.productPrice}</Text>
+                : 
+                <View style={styles.priceView}>
+                <Text style={styles.price}>{product.productPrice} DH</Text>
+                </View>
               }
 
               <View style={styles.buttonsView}>

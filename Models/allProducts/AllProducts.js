@@ -8,7 +8,7 @@ import Header from '../../Components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {addProduct,addQuantity,activeFavorite, inactiveFavorite} from '../../action';
-import { AllProductsStrings } from '../../Components/database/Strings';
+import { AllProductsStrings,HomeStrings } from '../../Components/database/Strings';
 
 
 
@@ -156,12 +156,12 @@ const checkActive = (id) =>
             (
               <View style={styles.availableView}>
                 <View style={[styles.circle,{backgroundColor: COLOURS.green}]}/>
-                <Text style={{ fontSize: 12,color: COLOURS.green, }}>Available</Text>
+                <Text style={{ fontSize: 12,color: COLOURS.green, }}>{language === "arabe" ? HomeStrings.unavailable.arabeText : HomeStrings.unavailable.englishText}</Text>
               </View>
             ) : (
               <View style={styles.availableView}>
                 <View style={[styles.circle,{backgroundColor: COLOURS.red}]}/>
-                <Text style={{fontSize: 12, color: COLOURS.red, }}>Unavailable</Text>
+                <Text style={{fontSize: 12, color: COLOURS.red, }}>{language === "arabe" ? HomeStrings.unavailable.arabeText : HomeStrings.unavailable.englishText}</Text>
               </View>
             )
           ) : null}

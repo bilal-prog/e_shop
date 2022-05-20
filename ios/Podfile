@@ -19,6 +19,8 @@ target 'e_shop' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'e_shopTests' do
     inherit! :complete
     # Pods for testing

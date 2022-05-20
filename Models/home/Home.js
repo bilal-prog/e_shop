@@ -52,9 +52,9 @@ export default function Home({navigation}){
 
   useEffect(() => {
     
-      getDataFromDB();
+      
     
-  }, []);
+  }, [getDataFromDB]);
 
   useEffect(() => {
 
@@ -303,38 +303,19 @@ setAccessory4(accessoryList4);
         {category == 'accessory' ? (
           isAvailable ? (
             <View style={styles.availableView}>
-              {
-                lang === "arabe" 
-                ? 
-                <>
-                  <Text style={{ fontSize: 12,color: COLOURS.green, }}>{lang === "arabe" ? HomeStrings.available.arabeText : HomeStrings.available.englishText}</Text>
-                  <View style={[styles.circle,{backgroundColor: COLOURS.green}]}/>
-                </>
-                :
-                <>
+              
                   <View style={[styles.circle,{backgroundColor: COLOURS.green}]}/>
                   <Text style={{ fontSize: 12,color: COLOURS.green, }}>{lang === "arabe" ? HomeStrings.available.arabeText : HomeStrings.available.englishText}</Text>
-                </>
-              }
+                
             </View>
           ) : (
             
-              lang === "arabe"
-              ? 
-                <>
-                  <View style={styles.availableView}>
-                    <Text style={{fontSize: 12, color: COLOURS.red, }}>{lang === "arabe" ? HomeStrings.unavailable.arabeText : HomeStrings.unavailable.englishText}</Text>
-                    <View style={[styles.circle,{backgroundColor: COLOURS.red}]}/>
-                  </View>
-                </>
-               : 
-                <>
-                  <View style={styles.availableView}>
-                    <View style={[styles.circle,{backgroundColor: COLOURS.red}]}/>
-                    <Text style={{fontSize: 12, color: COLOURS.red, }}>{lang === "arabe" ? HomeStrings.unavailable.arabeText : HomeStrings.unavailable.englishText}</Text>
-                  </View>
-                </>
               
+                  <View style={styles.availableView}>
+                    <View style={[styles.circle,{backgroundColor: COLOURS.red}]}/>
+                    <Text style={{fontSize: 12, color: COLOURS.red, }}>{lang === "arabe" ? HomeStrings.unavailable.arabeText : HomeStrings.unavailable.englishText}</Text>
+                  </View>
+                
             
           )
         ) : null}
@@ -442,7 +423,7 @@ const renderItem = ({item}) => {
         <ScrollView showsVerticalScrollIndicator={false} style={{height:"100%", width: '100%'}}
           
         >
-        <Header name={name} badgeShoppingBag={commands.length} badgeCart={productsStore.length} onPress={()=>{navigation.navigate("Cart")}} onPress2={()=>{navigation.navigate("Commands")}}/>
+        <Header name={name} badgeShoppingBag={commands.length} badgeCart={productsStore.length} onPress={()=>{navigation.navigate("Cart")}} onPress2={()=>{navigation.navigate("Commands")}} onPress3={()=>{navigation.navigate("Home")}}/>
         
         
         <View style={styles.container2}>

@@ -87,7 +87,7 @@ import { COLOURS } from '../../Components/database/Database'
       cardContainer1: {
         
         width: '100%',
-        height: 120,
+        height: 140,
         borderRadius: 10,
         backgroundColor: COLOURS.backgroundLight,
         position: 'relative',

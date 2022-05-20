@@ -54,6 +54,22 @@ export const AllProductsStrings = {
         arabeText: "جميع المستلزمات",
         englishText: "All Accessories"
     },
+    added:{
+        arabeText: "جميع المستلزمات",
+        englishText: "Product added"
+    },
+    addedTxt:{
+        arabeText: "جميع المستلزمات",
+        englishText: "Please check your Cart"
+    },
+    notadded:{
+        arabeText: "جميع المستلزمات",
+        englishText: "Product was not added"
+    },
+    notaddedTxt:{
+        arabeText: "جميع المستلزمات",
+        englishText: "This product is already in your Cart please check it"
+    },
 };
 
 export const FavoritesStrings = {
@@ -101,6 +117,31 @@ export const CommandsStrings = {
         arabeText: "منتجاتك",
         englishText: "Your Products"
     },
+    seconds:{
+        arabeText: "منتجاتك",
+        englishText: "s"
+    },
+    minutes:{
+        arabeText: "منتجاتك",
+        englishText: "min"
+    },
+    hours:{
+        arabeText: "منتجاتك",
+        englishText: "h"
+    },
+    days:{
+        arabeText: "منتجاتك",
+        englishText: "d"
+    },
+
+    text:{
+        arabeText: "هذه صفحة الطلبات الخاصة بك ، إنها فارغة لذا يرجى الانتقال لإضافة بعض المنتجات للطلب من هنا",
+        englishText: "This is your Commands Page, it's empty so  please go to add some products to command from here"
+    },
+    addButton:{
+        arabeText: "أضف",
+        englishText: "ADD"
+    },
     
 };
 
@@ -145,6 +186,83 @@ export const CartStrings = {
         arabeText: "المجموع",
         englishText: "Total"
     },
+
+
+
+    
+    create:{
+        arabeText: "المجموع",
+        englishText: "Creating a command"
+    },
+    createTxt:{
+        arabeText: "المجموع",
+        englishText: "Do you want to create a command?"
+    },
+    added:{
+        arabeText: "المجموع",
+        englishText: "Command was added"
+    },
+    addedTxt:{
+        arabeText: "المجموع",
+        englishText: "Please check your command in the Commands page"
+    },
+    yourCart:{
+        arabeText: "المجموع",
+        englishText: "Your Cart is 'Empty' !!!"
+    },
+    yourCartTxt:{
+        arabeText: "المجموع",
+        englishText: "Please add some products to check them out"
+    },
+    remove:{
+        arabeText: "المجموع",
+        englishText: "Product removing"
+    },
+    removeTxt:{
+        arabeText: "المجموع",
+        englishText: "Are you sure you want to remove this product?"
+    },
+
     
     
+};
+
+
+export const DetailsStrings = {
+    modified:{
+        arabeText: "المجموع",
+        englishText: "Command Was Modified"
+    },
+    modifiedTxt:{
+        arabeText: "المجموع",
+        englishText: "Please check your commands"
+    },
+    notmodified:{
+        arabeText: "المجموع",
+        englishText: "Command Wasn't Modified !"
+    },
+    notmodifiedTxt:{
+        arabeText: "المجموع",
+        englishText: "Sorry you can't modify this command, it's already "
+    },
+    new:{
+        arabeText: "حديث",
+        englishText: "New"
+    },
+    onDelivery:{
+        arabeText: "عند التسليم",
+        englishText: "On Delivery"
+    },
+    ready:{
+        arabeText: "مهيأ",
+        englishText: "Ready"
+    },
+    remove:{
+        arabeText: "المجموع",
+        englishText: "Product removing"
+    },
+    removeTxt:{
+        arabeText: "المجموع",
+        englishText: "Are you sure you want to remove this product?"
+    },
 }

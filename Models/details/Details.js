@@ -104,17 +104,17 @@ const ListFooterComponent = () =>(
 
       <Text style={styles.title}>{language === "arabe" ? CartStrings.total.arabeText : CartStrings.total.englishText}</Text>
 
-      <View style={[styles.totalView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+      <View style={styles.totalView}>
         <Text style={styles.total}>{language === "arabe" ? CartStrings.subTotal.arabeText : CartStrings.subTotal.englishText}</Text>
         <Text style={styles.total}>{totalPrice} DH</Text>
       </View>
 
-      <View style={[styles.totalView,{marginBottom: 45,flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+      <View style={[styles.totalView,{marginBottom: 45}]}>
         <Text style={styles.total}>{language === "arabe" ? CartStrings.shippingCost.arabeText : CartStrings.shippingCost.englishText}</Text>
-        <Text style={styles.total}>+100</Text>
+        <Text style={styles.total}>+100 DH</Text>
       </View>
 
-      <View style={[styles.totalView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+      <View style={styles.totalView}>
         <Text style={styles.total}>{language === "arabe" ? CartStrings.total.arabeText : CartStrings.total.englishText}</Text>
         <Text style={[styles.total,{color: COLOURS.black, fontWeight: '700', fontSize: 25}]}>{totalPrice + 100} DH</Text>
       </View>
@@ -345,7 +345,7 @@ const ListHeaderComponent = () =>(
                 
                 
             </View>
-            <View style={[styles.rowView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+            <View style={styles.rowView}>
               <Text style={styles.Title}>{language === "arabe" ? CommandsStrings.date.arabeText : CommandsStrings.date.englishText}:   </Text>
               <Text style={styles.cardTxtCommandDate}>{dateCommand} ({time})</Text>
             </View>
@@ -353,7 +353,7 @@ const ListHeaderComponent = () =>(
               <Text style={styles.Title}>{language === "arabe" ? CommandsStrings.adress.arabeText : CommandsStrings.adress.englishText}:</Text>
               <Text style={styles.cardTxtAdress} numberOfLines={2}>{commandCopy.details.adress}</Text>
             </View>
-            <View style={[styles.rowView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+            <View style={styles.rowView}>
                 <Text style={styles.Title}>{language === "arabe" ? CommandsStrings.price.arabeText : CommandsStrings.price.englishText}:  </Text>
                 <Text style={styles.Title}>{totalPrice +100} DH</Text>
             </View>

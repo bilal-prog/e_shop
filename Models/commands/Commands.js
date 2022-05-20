@@ -104,13 +104,13 @@ export default function Commands({navigation}){
         
 
         if(ss < 60 && mm === 0){
-            return ss+" seconds"
+            return ss+" s"
         }else if(mm < 60 && hh >= 1){
-            return mm+" mins"
+            return mm+" m"
         }else if(hh < 24 && d == 4){
-            return hh+" hrs"
+            return hh+" h"
         }else if(dd >= 5){
-            return  dd - 4 +" days";
+            return  dd - 4 +" d";
         }
 
     }
@@ -124,10 +124,12 @@ export default function Commands({navigation}){
             navigation.navigate("Details",{commandId: commandId,status: checkStatus(checkDate(date,commandId)),time: setMinutesOrHoursOrDaysOrDate(date), date: moment(date).format("DD/MM/YYYY")})
             dispatch(addCommandCopy(item))
         }}>
-            <View style={[styles.card2,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+            <View style={styles.card2}>
                 <View style={styles.firstHalf}>
-                    <View style={[styles.idDate,{justifyContent: language === "arabe" ? 'flex-end' : 'flex-start'}]}>
-                        <Text style={[styles.cardTxtCommandDate,{justifyContent: language === "arabe" ? 'flex-end' : 'flex-start'}]}># {commandId}</Text>
+                    <View style={styles.idDate}>
+                        <View style={styles.card2}>
+                            <Text style={styles.cardTxtCommandDate}># {commandId}</Text>
+                        </View>
                         <Text style={styles.cardTxtCommandDate}>{language === "arabe" ? CommandsStrings.date.arabeText : CommandsStrings.date.englishText}:     {moment(date).format("DD/MM/YYYY")} ({setMinutesOrHoursOrDaysOrDate(date)})</Text>
                         
                         
@@ -144,7 +146,7 @@ export default function Commands({navigation}){
                     <Text style={styles.cardTxtPrice}>${price}</Text>
                 </View>
             </View>
-            <View style={[styles.statusView,{flexDirection: language === "arabe" ? 'row-reverse' : 'row'}]}>
+            <View style={styles.statusView}>
                 <View style={styles.statusView2}>
                 {checkStatus(checkDate(date,commandId)) === 'New' ? 
                     <View style={styles.circle2}>
@@ -205,6 +207,21 @@ export default function Commands({navigation}){
      }
 
 
+     const ListEmptyComponent = () =>(
+        <View style={styles.empty}>
+          <Text style={styles.emptyTxt}>{language === "arabe" ? CommandsStrings.text.arabeText : CommandsStrings.text.englishText}</Text>
+      
+          <TouchableOpacity style={styles.buttonCheckOut}
+          onPress={()=>{
+            navigation.navigate("Home")
+          }}
+          >
+            <Text style={styles.BtnText}>{language === "arabe" ? CommandsStrings.addButton.arabeText : CommandsStrings.addButton.englishText}   {'->'}</Text>
+          </TouchableOpacity>
+        </View>
+      )
+
+
 
 
 
@@ -212,12 +229,12 @@ export default function Commands({navigation}){
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={COLOURS.white} barStyle="dark-content" />
-            <Header name="Commands" onPress={() => navigation.goBack()}/>
+            <Header name1={language === "arabe" ? CommandsStrings.pageHeader.arabeText : CommandsStrings.pageHeader.englishText} name="Commands" onPress={() => navigation.goBack()}/>
 
             <View style={styles.container2}>
             <FlatList
                   data={commands}
-                  
+                  ListEmptyComponent={ListEmptyComponent}
                   renderItem={renderItem}
                   keyExtractor={item=>item.details.commandId}
                   maxToRenderPerBatch={5}

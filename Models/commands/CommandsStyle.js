@@ -133,6 +133,28 @@ const styles = StyleSheet.create({
         color: COLOURS.black,
         fontWeight: '400'
     },
+    empty: {
+        width: '100%',
+        justifyContent: 'center',
+        marginVertical: 10
+      },
+      emptyTxt: {
+        color: COLOURS.black,
+        fontSize: 26,
+        textAlign: 'center'
+      },
+      buttonCheckOut: {
+        backgroundColor: COLOURS.blue,
+        padding: 10,
+        borderRadius: 20,
+        marginVertical: 30
+        
+    },
+    BtnText: {
+      color: COLOURS.white,
+      fontSize: 20,
+      textAlign: 'center'
+    },
     
     
     
